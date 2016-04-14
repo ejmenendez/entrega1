@@ -1,0 +1,24 @@
+require 'highline/import'
+
+#nombre = ask "¿Cuál es tu nombre?"
+
+#say "Tu nombre es: #{nombre}"
+
+salir = false
+
+while !salir do 
+
+choose do |menu| 
+	menu.prompt = "Desea salir?"
+	menu.choice(:Si){
+		salir = true
+		say "Gracias por venir"
+	}
+	menu.choice(:No) do
+		say "Ok, nos quedamos"
+	end
+end
+
+end
+
+
