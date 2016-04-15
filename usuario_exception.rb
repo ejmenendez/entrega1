@@ -1,0 +1,4 @@
+
+class UsuarioError < StandardError
+
+end
