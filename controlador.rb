@@ -25,5 +25,10 @@ class Controlador
 	def ingresar(usuario, clave)
 		@manejador.ingresar(usuario, @encriptador.encriptar(clave))
 	end
+	
+	# Crea un usuario nuevo
+	def crear_usuario(usuario, clave)
+		@manejador.agregar_usuario(usuario, clave)
+	end
 
 end

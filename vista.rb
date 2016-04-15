@@ -43,18 +43,36 @@ class Vista
 		end
 	end
 	
+	# Método para el login con ingreso de usuario y clave
 	def ingresar
-		usuario = ask("Ingrese su usuario: ") {}
-		clave	= ask("Ingrese su clave: ") { |q| q.echo = "*" }
-		
-		if controlador.ingresar(usuario, clave)
+		begin
+			usuario = ask("Ingrese su usuario: ") {}
+			clave	= ask("Ingrese su clave: ") { |q| q.echo = "*" }
+			
+			controlador.ingresar(usuario, clave)
 			puts "Ingreso exitoso!"
+			
+		rescue UsuarioError => e
+			puts e.message
 		end
 	end
 	
+	# Método para la creación de un usuario nuevo
 	def crear_usuario
-	
-	
+		begin
+			usuario = ask("Ingrese usuario: ") {}
+			clave	= ask("Ingrese clave: ") { |q| q.echo = "*" }
+			conf_clave	= ask("Confirme la clave: ") { |q| q.echo = "*" }
+			
+			if clave.eql? conf_clave
+				controlador.crear_usuario(usuario, clave)
+				puts "Usuario creado!"
+			else
+				puts "Las claves ingresadas no coinciden!"
+			end
+		rescue UsuarioError => e
+			puts e.message
+		end
 	end
 	
 	

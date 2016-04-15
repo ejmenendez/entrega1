@@ -10,7 +10,7 @@ class Usuario
 	
 	# Devuelve true si el usuario y la clave enviados por parámetros son iguales a los de este objeto
 	def control_ingreso(p_usuario, p_clave)
-		@esta_logueado = (p_usuario.eql? usuario) && (p_clave.eql? clave)
+		@esta_logueado = (p_usuario.eql? @usuario) && (p_clave.eql? @clave)
 	end
 	
 	# Cambia el estado a no logueado

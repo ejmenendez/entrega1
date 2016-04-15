@@ -33,7 +33,7 @@ class Manejador_usuarios
 	def ingresar(usuario, clave)
 		lista_usuarios.each do |usr|
 			if usr.control_ingreso(usuario, clave)
-				true
+				return true
 			end
 		end
 		
