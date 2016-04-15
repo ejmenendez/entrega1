@@ -1,4 +1,5 @@
 require_relative 'encriptador'
+require_relative 'encriptador_caesar'
 require_relative 'manejador_usuarios'
 
 class Controlador
@@ -7,8 +8,11 @@ class Controlador
 	attr_reader :manejador
 	
 	def initialize
-		@encriptador = Encriptador.new
+		# @encriptador = Encriptador.new
+		@encriptador = EncriptadorCaesar.new(3)
 		@manejador   = Manejador_usuarios.new
+		# agrego el usuario de prueba
+		crear_usuario("admin", "ADMIN")
 	end
 	
 	# Devuelve un String con el nombre del tipo de encriptación actual
@@ -28,7 +32,7 @@ class Controlador
 	
 	# Crea un usuario nuevo
 	def crear_usuario(usuario, clave)
-		@manejador.agregar_usuario(usuario, clave)
+		@manejador.agregar_usuario(usuario, @encriptador.encriptar(clave))
 	end
 
 end

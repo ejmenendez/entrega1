@@ -7,8 +7,6 @@ class Manejador_usuarios
 	
 	def initialize
 		@lista_usuarios = []
-		# agrego el usuario de prueba
-		agregar_usuario("admin", "1234")
 	end
 	
 	# Devuelve true si algún usuario está logueado en el sistema

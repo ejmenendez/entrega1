@@ -61,8 +61,8 @@ class Vista
 	def crear_usuario
 		begin
 			usuario = ask("Ingrese usuario: ") {}
-			clave	= ask("Ingrese clave: ") { |q| q.echo = "*" }
-			conf_clave	= ask("Confirme la clave: ") { |q| q.echo = "*" }
+			clave	= ask("Ingrese clave: ") { |q| q.validate = /[A-Z]/ } # q.echo = "*" 
+			conf_clave	= ask("Confirme la clave: ") { |q| q.validate = /[A-Z]/ } # q.echo = "*" 
 			
 			if clave.eql? conf_clave
 				controlador.crear_usuario(usuario, clave)
