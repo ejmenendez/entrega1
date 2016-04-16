@@ -10,8 +10,9 @@ class Vista
 
 	def dibujar
 		salir = false
-		say "Tipo de encriptación: #{controlador.tipo_encriptacion}"
+		
 		while !salir do 
+			say "Tipo de encriptación: #{controlador.tipo_encriptacion}"
 			choose do |menu| 
 				
 				# la opción de login se muestra sólo si no hay usuario logueados
@@ -31,7 +32,7 @@ class Vista
 				end
 				
 				menu.choice(:Cambiar_Encriptación) do
-					say "Cambiar"
+					cambiar_encriptacion
 				end
 				
 				menu.choice(:Estado) do
@@ -46,7 +47,7 @@ class Vista
 		end
 	end
 	
-	# Método para el login con ingreso de usuario y clave
+	# Método que toma los datos y ejecuta el login con el usuario y clave ingresados
 	def ingresar
 		begin
 			usuario = ask("Ingrese su usuario: ") {}
@@ -60,7 +61,7 @@ class Vista
 		end
 	end
 	
-	# Método para la creación de un usuario nuevo
+	# Método que toma los datos para la creación de un usuario nuevo e intenta crearlo
 	def crear_usuario
 		begin
 			usuario = ask("Ingrese usuario: ") {}
@@ -86,6 +87,25 @@ class Vista
 			puts "El usuario que quiere crear ya existe"
 		end
 	end
+	
+	# Método que muestra el menú para cambiar de encriptación
+	def cambiar_encriptacion
+		choose do |encriptacion|
+			
+			encriptacion.choice(:Texto_Plano) do
+				@controlador.cambiar_encriptacion_texto_plano
+			end 
+			
+			encriptacion.choice(:Caesars_Cypher) do
+				@controlador.cambiar_encriptacion_caesar
+			end 
+			
+			encriptacion.choice(:BCrypt) do
+				@controlador.cambiar_encriptacion_bcrypt
+			end 
+		end
+	end
+	
 	
 	
 end
