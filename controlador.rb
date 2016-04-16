@@ -43,5 +43,24 @@ class Controlador
 	def cambiar_encriptacion_bcrypt
 		@manejador.cambiar_encriptacion_bcrypt
 	end
-
+	
+	# Devuelve la regexp a utilizarse para el ingreso de claves del encriptador actual
+	def regexp_clave
+		@manejador.regexp_clave
+	end
+	
+	# Devuelve el mensaje de error asociado a la regexp de ingreso de claves del encriptador
+	# actual. Elmensaje se muestra si la clave ingresada no cumple con la regexp
+	def msj_error_clave
+		@manejador.msj_error_clave
+	end
+	
+	def nombre_usuario_logueado
+		@manejador.nombre_usuario_logueado
+	end
+	
+	# Cierra la sesión del usuario actual
+	def cerrar_sesion
+		@manejador.cerrar_sesion
+	end
 end

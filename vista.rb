@@ -4,10 +4,12 @@ class Vista
 	attr_reader :controlador
 	
 	def initialize
-		@controlador = Controlador.new
+		@controlador 		= Controlador.new
+		cargar_validador_clave
 		dibujar
 	end
-
+	
+	# Muestra en pantalla el menú principal
 	def dibujar
 		salir = false
 		
@@ -26,8 +28,9 @@ class Vista
 						crear_usuario
 					end
 				else
+					# la opción de cerrar sesión se muestra sólo si hay un usuario logueado
 					menu.choice(:Cerrar_Sesión) do
-						say "Deslogueando..."
+						cerrar_sesion
 					end
 				end
 				
@@ -36,7 +39,7 @@ class Vista
 				end
 				
 				menu.choice(:Estado) do
-					say "Tu estado es"
+					mostrar_estado
 				end
 				
 				menu.choice(:Salir) do
@@ -51,13 +54,14 @@ class Vista
 	def ingresar
 		begin
 			usuario = ask("Ingrese su usuario: ") {}
-			clave	= ask("Ingrese su clave: ") { |q| q.echo = "*" }
-			
+			clave = ingresar_clave
 			controlador.ingresar(usuario, clave)
 			puts "Ingreso exitoso!"
-			
 		rescue UsuarioOClaveError 
 			puts "El usuario o la clave ingresada son incorrectos"
+		rescue UsuarioYaLogueadoError
+			puts "Ya hay una sesión activa"
+			mostrar_estado
 		end
 	end
 	
@@ -65,17 +69,8 @@ class Vista
 	def crear_usuario
 		begin
 			usuario = ask("Ingrese usuario: ") {}
-			clave	= ask("Ingrese clave: ") do  |q| 
-				q.echo = "*" 
-				q.validate = /[A-Za-z]/  
-				q.responses[:not_valid] = "La clave debe contener sólo caracteres de la A a la Z"
-			end
-			
-			conf_clave	= ask("Confirme la clave: ") do  |q| 
-				q.echo = "*" 
-				q.validate = /[A-Za-z]/  
-				q.responses[:not_valid] = "La clave debe contener sólo caracteres de la A a la Z"
-			end
+			clave = ingresar_clave(@regexp_clave , @msj_error_clave)
+			conf_clave = ingresar_clave(@regexp_clave , @msj_error_clave , "Confirme la clave: ")
 			
 			if clave.eql? conf_clave
 				controlador.crear_usuario(usuario, clave)
@@ -83,8 +78,12 @@ class Vista
 			else
 				puts "Las claves ingresadas no coinciden!"
 			end
+	
 		rescue UsuarioYaExistenteError
 			puts "El usuario que intenta crear ya existe"
+		rescue CaracterNoValidoError
+			# En caso que haya llegado al servidor una clave con algún caracter incorrecto
+			puts "La clave elegida contiene caracteres erróneos"
 		end
 	end
 	
@@ -104,8 +103,52 @@ class Vista
 				@controlador.cambiar_encriptacion_bcrypt
 			end 
 		end
+		
+		cargar_validador_clave
 	end
 	
+	# Espera el ingreso de una cadena que se va a utilizar como clave, si se envía una
+	# regular expression valida que lo ingresado sea correcto, en caso de error muestra 
+	# un mensaje enviado por parámetro u otro por defecto.
+	def ingresar_clave(regexp = nil, mensaje = nil, texto = "Ingrese clave: ")		
+		ask(texto) do  |q| 
+			q.echo = "*"
+			if regexp != nil 
+				q.validate = regexp  
+				q.responses[:not_valid] = mensaje != nil ? mensaje : "La clave contiene caracteres incorrectos"
+			end
+		end
+	end
 	
+	# Carga la regexp y el mensaje a utilizar para validar las claves ingresadas
+	# según el método de encriptación que se utiliza
+	def cargar_validador_clave
+		@regexp_clave 	 = @controlador.regexp_clave
+		@msj_error_clave = @controlador.msj_error_clave
+	end
+	
+	# Muestra el estado actual del usuario, si está logueado o no
+	def mostrar_estado
+		begin
+			if @controlador.hay_usuario_logueado?
+				puts "Su sesión está activa con el usuario: #{@controlador.nombre_usuario_logueado}"
+			else
+				puts "Usted no ha iniciado sesión"
+			end
+		rescue NoHayUsuarioLogueadoError
+			# No debería suceder...
+			puts "No hay usuario con sesión activa para mostrar!!"
+		end
+	end
+	
+	# Cierra la sesión del usuario actual
+	def cerrar_sesion
+		begin
+			@controlador.cerrar_sesion
+		rescue
+			# No debería suceder...
+			puts "No hay usuario con sesión activa en éste momento!!"
+		end
+	end
 	
 end

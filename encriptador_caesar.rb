@@ -2,12 +2,21 @@ require_relative 'caracter_no_valido_error'
 
 class EncriptadorCaesar
 	attr_reader :tipo_encriptacion
+	attr_reader :regexp_clave
+	attr_reader :msj_error_clave
 	
 	# Por defecto la cantidad de lugares corridos es 3
 	def initialize(lugares = 3, abecedario = ('A'..'Z').to_a.join)
+		# Defino los caracteres que pueden usarse en la clave y el mensaje de error
+		@regexp_clave = /[A-Za-z]/
+		@msj_error_clave = "La clave debe contener sólo caracteres de la A a la Z"
+		
+		# Dos arrays, uno encriptado y el otro no, para después hacer el reemplazo en 
+		# la cadena que se quiere encriptar o desencriptar
 		i = lugares % abecedario.size 
 		@desencriptado = abecedario
 		@encriptado = abecedario[i..-1] + abecedario[0...i]
+		
 		@tipo_encriptacion = "Caesar's Cypher"
 	end
 	
