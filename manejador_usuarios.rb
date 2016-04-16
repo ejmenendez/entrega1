@@ -7,9 +7,15 @@ require_relative 'encriptador_texto_plano'
 require_relative 'encriptador_caesar'
 require_relative 'encriptador_bcrypt'
 
+# Contiene una lista de usuarios existentes en el sistema. 
+# Realiza las tareas de ingreso, cierre de sesión, cambio de encriptación, y envío
+# de lo datos del usuario con sesión iniciada y el encriptador en uso.
+# Contiene el encriptador que se utiliza para las claves de los usuarios.
 class ManejadorUsuarios
+	# El encriptador que se utiliza en el sistema
 	attr_reader :encriptador
 	
+	# Inicializa la lista de usuarios y carga el encriptador por defecto
 	def initialize
 		cambiar_encriptacion_caesar
 		@lista_usuarios = []

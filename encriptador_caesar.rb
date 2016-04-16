@@ -1,18 +1,31 @@
 require_relative 'caracter_no_valido_error'
 
+# Encripta y valida las claves de usuarios utilizando Caesar's Cypher
+# Los lugares a desplazar son configurables al momento de instanciar, 
+# por defecto es 3.
 class EncriptadorCaesar
+		
+	# El nombre del encriptador en formato String
 	attr_reader :tipo_encriptacion
+	# Regular expression que se necesita para validar la clave cuando es ingresada por el 
+	# usuario en la vista
 	attr_reader :regexp_clave
+	# Mensaje de error para ser mostrado si el usuario ingresa una cadena que no cumple con
+	# la regular expression asignada
 	attr_reader :msj_error_clave
 	
-	# Por defecto la cantidad de lugares corridos es 3
+	# Asigna el tipo de encriptción en String, la regular expression y el mensaje de error
+	# para la clave.
+	# Por defecto la cantidad de lugares desplazados es 3
+	# Puede recibir un array con caracteres que conforman el abecedario a utilizar, por defecto
+	# es A...Z
+	# Crea dos arrays, uno encriptado y el otro no, para después hacer el reemplazo en 
+	# la cadena que se quiere encriptar o desencriptar
 	def initialize(lugares = 3, abecedario = ('A'..'Z').to_a.join)
 		# Defino los caracteres que pueden usarse en la clave y el mensaje de error
 		@regexp_clave = /[A-Za-z]/
 		@msj_error_clave = "La clave debe contener sólo caracteres de la A a la Z"
 		
-		# Dos arrays, uno encriptado y el otro no, para después hacer el reemplazo en 
-		# la cadena que se quiere encriptar o desencriptar
 		i = lugares % abecedario.size 
 		@desencriptado = abecedario
 		@encriptado = abecedario[i..-1] + abecedario[0...i]
@@ -46,8 +59,8 @@ class EncriptadorCaesar
 	end
 	
 	# Valida que una cadena enviada y una clave encriptada sean iguales
-	# cuando la clave se desencripta. Convierte la cadena
-	# enviada a mayúsculas
+	# cuando la clave se desencripta. Convierte la cadena que se quiere comparar
+	# con la clave a mayúsculas
 	def validar_clave(cadena, clave)
 		(desencriptar clave).eql? cadena.upcase
 	end

@@ -1,4 +1,4 @@
-# Clase que crea excepciones referentes a problemas con usuarios y claves
+# Se levanta cuando se quiere crear un usuario que ya existe en el sistema
 class UsuarioYaExistenteError < StandardError
 
 end

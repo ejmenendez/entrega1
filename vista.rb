@@ -1,20 +1,25 @@
 require_relative 'controlador'
-include HighLine::SystemExtensions
 
+# Dibuja el menú principal, los submenús y los mensajes.
 class Vista
-	attr_reader :controlador
-	
+		
+	# Instancia el controlador.
+	# Asigna los valores para validar la clave de acuerdo a la encriptación que se esté
+	# utilizando.
+	# Dibuja el menú principal
 	def initialize
 		@controlador 		= Controlador.new
 		cargar_validador_clave
 		dibujar
 	end
 	
-	# Muestra en pantalla el menú principal
+	# Muestra en pantalla el menú principal mientras no se seleccione la opción de salir
+	# del programa
 	def dibujar
 		salir = false
 		
 		while !salir do 
+			# Informa la encriptación que se está utilizando actualmente
 			puts "Tipo de encriptación: \e[34m#{controlador.tipo_encriptacion}\e[0m"
 					
 			choose do |menu| 
@@ -36,6 +41,8 @@ class Vista
 					end
 				end
 				
+				# Las siguientes opciones se muestran independientemente de si hay usuarios
+				# logueados o no
 				menu.choice(:Cambiar_Encriptación) do
 					cambiar_encriptacion
 				end
@@ -52,7 +59,7 @@ class Vista
 		end
 	end
 	
-	# Método que toma los datos y ejecuta el login con el usuario y clave ingresados
+	# Método que toma los datos e intenta ingresar con el usuario y clave ingresados
 	def ingresar
 		begin
 			usuario = ask("Ingrese su usuario: ") {}
@@ -62,12 +69,16 @@ class Vista
 		rescue UsuarioOClaveError 
 			mensaje_error "El usuario o la clave ingresada son incorrectos"
 		rescue UsuarioYaLogueadoError
+			# En caso de fallar el menú y querer ingresar con un usuario ya activo
 			mensaje_error "Ya hay una sesión activa"
 			mostrar_estado
 		end
 	end
 	
-	# Método que toma los datos para la creación de un usuario nuevo e intenta crearlo
+	# Método que toma los datos para la creación de un usuario nuevo e intenta crearlo:
+	# se ingresa el usuario y la clave dos veces para confirmarlas.
+	# Las claves ingresadas deben coincidir para poder dar de alta al usuario,
+	# y no debe haber otro usuario con el mismo nombre.
 	def crear_usuario
 		begin
 			usuario = ask("Ingrese usuario: ") {}
@@ -82,6 +93,7 @@ class Vista
 			end
 	
 		rescue UsuarioYaExistenteError
+			# Ya hay un usuario con el nombre elegido
 			mensaje_error "El usuario que intenta crear ya existe"
 		rescue CaracterNoValidoError
 			# En caso que haya llegado al servidor una clave con algún caracter incorrecto
@@ -89,7 +101,8 @@ class Vista
 		end
 	end
 	
-	# Método que muestra el menú para cambiar de encriptación
+	# Método que muestra el menú para cambiar de encriptación, y carga los validadores de
+	# clave que correspondan
 	def cambiar_encriptacion
 		choose do |encriptacion|
 			
@@ -139,7 +152,8 @@ class Vista
 				mensaje_error "Usted no ha iniciado sesión"
 			end
 		rescue NoHayUsuarioLogueadoError
-			# No debería suceder...
+			# En el caso que falle el menú y se quiera mostrar el usuario sin haber
+			# ninguno logueado
 			mensaje_error "No hay usuario con sesión activa para mostrar!!"
 		end
 	end
@@ -148,25 +162,25 @@ class Vista
 	def cerrar_sesion
 		begin
 			@controlador.cerrar_sesion
-		rescue
-			# No debería suceder...
+		rescue NoHayUsuarioLogueadoError
+			# En caso que falle el menú y se quiera cerrar sesión sin haber usuarios logueados
 			mensaje_error "No hay usuario con sesión activa en éste momento!!"
 		end
 	end
 	
 	# Muestra un mensaje de error y espera a que se presione enter
 	def mensaje_error(mensaje)
-		mostrar_mensaje 31,mensaje
+		mostrar_mensaje 31, mensaje
 	end
 	
 	# Muestra un mensaje de éxito y espera a que se presione enter
 	def mensaje_ok(mensaje)
-		mostrar_mensaje 32,mensaje
+		mostrar_mensaje 32, mensaje
 	end
 	
 	# Muestra un mensaje informativo y espera a que se presione enter
 	def mensaje_info(mensaje)
-		mostrar_mensaje 34,mensaje
+		mostrar_mensaje 34, mensaje
 	end
 	
 	# Muestra un mensaje con el color enviado por parámetro 
