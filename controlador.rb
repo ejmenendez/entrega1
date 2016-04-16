@@ -1,5 +1,6 @@
 require_relative 'encriptador'
 require_relative 'encriptador_caesar'
+require_relative 'encriptador_bcrypt'
 require_relative 'manejador_usuarios'
 
 class Controlador
@@ -9,7 +10,8 @@ class Controlador
 	
 	def initialize
 		# @encriptador = Encriptador.new
-		@encriptador = EncriptadorCaesar.new(3)
+		# @encriptador = EncriptadorCaesar.new(3)
+		@encriptador = EncriptadorBCrypt.new
 		@manejador   = Manejador_usuarios.new
 		# agrego el usuario de prueba
 		crear_usuario("admin", "ADMIN")

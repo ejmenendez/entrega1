@@ -20,7 +20,7 @@ class Manejador_usuarios
 		lista_usuarios.each do |usr|
 			if usr.usuario.eql? usuario
 				# ya existe el usuario
-				raise UsuarioError.new "El usuario ingresado ya se encuentra en el sistema"
+				raise UsuarioYaExistenteError.new
 			end
 		end
 		@lista_usuarios.push(Usuario.new(usuario, clave))
@@ -36,7 +36,7 @@ class Manejador_usuarios
 		end
 		
 		# en este punto, no coincide lo enviado con  ningún usuario o contraseña
-		raise UsuarioError.new "Usuario o clave incorrectos"
+		raise UsuarioOClaveError.new 
 	end
 		
 end

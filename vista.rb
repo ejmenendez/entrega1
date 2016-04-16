@@ -1,5 +1,6 @@
 require_relative 'controlador'
-require_relative 'controlador'
+require_relative 'usuario_o_clave_error'
+require_relative 'usuario_ya_existente_error'
 
 class Vista
 	attr_reader :controlador
@@ -26,9 +27,13 @@ class Vista
 						crear_usuario
 					end
 				else
-					menu.choice(:Salir) do
+					menu.choice(:Cerrar_Sesión) do
 						say "Deslogueando..."
 					end
+				end
+				
+				menu.choice(:Cambiar_Encriptación) do
+					say "Cambiar"
 				end
 				
 				menu.choice(:Estado) do
@@ -52,8 +57,8 @@ class Vista
 			controlador.ingresar(usuario, clave)
 			puts "Ingreso exitoso!"
 			
-		rescue UsuarioError => e
-			puts e.message
+		rescue UsuarioOClaveError 
+			puts "El usuario o la clave ingresada son incorrectos"
 		end
 	end
 	
@@ -61,8 +66,17 @@ class Vista
 	def crear_usuario
 		begin
 			usuario = ask("Ingrese usuario: ") {}
-			clave	= ask("Ingrese clave: ") { |q| q.validate = /[A-Z]/ } # q.echo = "*" 
-			conf_clave	= ask("Confirme la clave: ") { |q| q.validate = /[A-Z]/ } # q.echo = "*" 
+			clave	= ask("Ingrese clave: ") do  |q| 
+				q.echo = "*" 
+				q.validate = /[A-Za-z]/  
+				q.responses[:not_valid] = "La clave debe contener sólo caracteres de la A a la Z"
+			end
+			
+			conf_clave	= ask("Confirme la clave: ") do  |q| 
+				q.echo = "*" 
+				q.validate = /[A-Za-z]/  
+				q.responses[:not_valid] = "La clave debe contener sólo caracteres de la A a la Z"
+			end
 			
 			if clave.eql? conf_clave
 				controlador.crear_usuario(usuario, clave)
@@ -70,8 +84,8 @@ class Vista
 			else
 				puts "Las claves ingresadas no coinciden!"
 			end
-		rescue UsuarioError => e
-			puts e.message
+		rescue UsuarioYaExistenteError
+			puts "El usuario que quiere crear ya existe"
 		end
 	end
 	

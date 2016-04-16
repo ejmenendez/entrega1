@@ -3,6 +3,7 @@ class Usuario
 	attr_reader	:esta_logueado
 	
 	def initialize(usuario_inicial, clave_inicial)
+		puts "usr clave: #{clave_inicial}"
 		@usuario = usuario_inicial
 		@clave = clave_inicial
 		@esta_logueado = false
