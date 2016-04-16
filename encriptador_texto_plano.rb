@@ -10,8 +10,9 @@ class EncriptadorTextoPlano
 		clave
 	end
 	
-	def desencriptar(clave)
-		clave
+	# Valida que uns cadena enviado y una clave  sean iguales
+	def validar_clave(cadena, clave)
+		clave.eql? cadena
 	end
 	
 end

@@ -84,7 +84,7 @@ class Vista
 				puts "Las claves ingresadas no coinciden!"
 			end
 		rescue UsuarioYaExistenteError
-			puts "El usuario que quiere crear ya existe"
+			puts "El usuario que intenta crear ya existe"
 		end
 	end
 	

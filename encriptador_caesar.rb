@@ -1,3 +1,4 @@
+require_relative 'caracter_no_valido_error'
 
 class EncriptadorCaesar
 	attr_reader :tipo_encriptacion
@@ -10,15 +11,37 @@ class EncriptadorCaesar
 		@tipo_encriptacion = "Caesar's Cypher"
 	end
 	
-	# Antes de reemplazar los caracteres, convierte la clave a mayúsculas
+	# Encripta la clave enviada. Debe ser alfabética. Convierte la cadena
+	# enviada a mayúsculas
 	def encriptar(clave)
-		clave.upcase
-		clave.tr(@desencriptado, @encriptado)
+		if cadena_valida? clave
+			clave.upcase.tr(@desencriptado, @encriptado)
+		else
+			raise CaracterNoValidoError.new clave
+		end
 	end
 	
-	# Esta opción debería ser de uso privado - ver
-	def desencriptar(string)
-		string.upcase
-		string.tr(@encriptado, @desencriptado)
+	# Desencripta la clave enviada. Debe ser alfabética. Convierte la cadena
+	# enviada a mayúsculas
+	def desencriptar(clave)
+		if cadena_valida? clave
+			clave.upcase.tr(@encriptado, @desencriptado)
+		else
+			raise CaracterNoValidoError.new clave
+		end
 	end
+	
+	# Valida que la clave sean sólo letras A - Z
+	def cadena_valida?(cadena)
+		cadena.match(/[A-Za-z]/) { |m| m != nil }
+	end
+	
+	# Valida que una cadena enviada y una clave encriptada sean iguales
+	# cuando la clave se desencripta. Convierte la cadena
+	# enviada a mayúsculas
+	def validar_clave(cadena, clave)
+		(desencriptar clave).eql? cadena.upcase
+	end
+	
+
 end

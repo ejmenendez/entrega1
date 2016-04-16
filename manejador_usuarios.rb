@@ -9,7 +9,7 @@ class ManejadorUsuarios
 	attr_reader :encriptador
 	
 	def initialize
-		cambiar_encriptacion_texto_plano	
+		cambiar_encriptacion_caesar
 		@lista_usuarios = []
 	end
 	
@@ -25,20 +25,23 @@ class ManejadorUsuarios
 			# ya existe el usuario
 			raise UsuarioYaExistenteError.new
 		end
-		
 		@lista_usuarios.push(Usuario.new(usuario, @encriptador.encriptar(clave)))
 	end
 	
 	# Comprueba si el usuario y la clave enviados pertenecen a algún usuario que esté
 	# actualmente en la colección
 	def ingresar(usuario, clave)
-		if @lista_usuarios.any? { |usr| usr.control_ingreso(usuario, @encriptador.encriptar(clave)) }
-			# éste return debe ser explícito
-			return true
+		@lista_usuarios.each do |usr| 
+			if usr.usuario.eql? usuario 
+				# si el usuario existe, se comprueba la clave
+				if @encriptador.validar_clave(clave, usr.clave)
+					usr.iniciar_sesion
+					# éste return debe ser explícito
+					return true
+				end
+			end
 		end
-		
-		ojooo implementación nueva para el ingreso!!!!!!
-		
+				
 		# en este punto, no coincide lo enviado con  ningún usuario y contraseña
 		raise UsuarioOClaveError.new 
 	end
