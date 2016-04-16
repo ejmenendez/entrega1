@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class EncriptadorTextoPlano - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>encriptador_texto_plano.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-encriptar">#encriptar</a>
+    
+    <li ><a href="#method-i-validar_clave">#validar_clave</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./CaracterNoValidoError.html">CaracterNoValidoError</a>
+  
+    <li><a href="./Controlador.html">Controlador</a>
+  
+    <li><a href="./EncriptadorBCrypt.html">EncriptadorBCrypt</a>
+  
+    <li><a href="./EncriptadorCaesar.html">EncriptadorCaesar</a>
+  
+    <li><a href="./EncriptadorTextoPlano.html">EncriptadorTextoPlano</a>
+  
+    <li><a href="./ManejadorUsuarios.html">ManejadorUsuarios</a>
+  
+    <li><a href="./NoHayUsuarioLogueadoError.html">NoHayUsuarioLogueadoError</a>
+  
+    <li><a href="./Usuario.html">Usuario</a>
+  
+    <li><a href="./UsuarioOClaveError.html">UsuarioOClaveError</a>
+  
+    <li><a href="./UsuarioYaExistenteError.html">UsuarioYaExistenteError</a>
+  
+    <li><a href="./UsuarioYaLogueadoError.html">UsuarioYaLogueadoError</a>
+  
+    <li><a href="./Vista.html">Vista</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class EncriptadorTextoPlano</h1>
+
+  <div id="description" class="description">
+    
+<p>No implementa encriptación, las claves son guardadas tal como son enviadas.
+Valida una cadena enviada comparándola con una clave almacenada</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-msj_error_clave" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">msj_error_clave</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Mensaje de error para ser mostrado si el usuario ingresa una cadena que no
+cumple con la regular expression asignada</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-regexp_clave" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">regexp_clave</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Regular expression que se necesita para validar la clave cuando es
+ingresada por el  usuario en la vista</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-tipo_encriptacion" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">tipo_encriptacion</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>El nombre del encriptador en formato String</p>
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Asigna el tipo de encriptción en String, la regular expression y el mensaje
+de error para la clave</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+        <span class="ruby-ivar">@tipo_encriptacion</span> = <span class="ruby-string">&#39;Texto Plano&#39;</span>
+        <span class="ruby-ivar">@regexp_clave</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-ivar">@msj_error_clave</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-encriptar" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">encriptar</span><span
+            class="method-args">(clave)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Como es texto plano, se devuelve la misma cadena enviada</p>
+          
+          
+
+          
+          <div class="method-source-code" id="encriptar-source">
+            <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">encriptar</span>(<span class="ruby-identifier">clave</span>)
+        <span class="ruby-identifier">clave</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- encriptar-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- encriptar-method -->
+
+    
+      <div id="method-i-validar_clave" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validar_clave</span><span
+            class="method-args">(cadena, clave)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Valida que uns cadena enviada y una clave  sean iguales</p>
+          
+          
+
+          
+          <div class="method-source-code" id="validar_clave-source">
+            <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validar_clave</span>(<span class="ruby-identifier">cadena</span>, <span class="ruby-identifier">clave</span>)
+        <span class="ruby-identifier">clave</span>.<span class="ruby-identifier">eql?</span> <span class="ruby-identifier">cadena</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- validar_clave-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- validar_clave-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

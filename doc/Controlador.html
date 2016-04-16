@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Controlador - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>controlador.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-cambiar_encriptacion_bcrypt">#cambiar_encriptacion_bcrypt</a>
+    
+    <li ><a href="#method-i-cambiar_encriptacion_caesar">#cambiar_encriptacion_caesar</a>
+    
+    <li ><a href="#method-i-cambiar_encriptacion_texto_plano">#cambiar_encriptacion_texto_plano</a>
+    
+    <li ><a href="#method-i-cerrar_sesion">#cerrar_sesion</a>
+    
+    <li ><a href="#method-i-crear_usuario">#crear_usuario</a>
+    
+    <li ><a href="#method-i-hay_usuario_logueado-3F">#hay_usuario_logueado?</a>
+    
+    <li ><a href="#method-i-ingresar">#ingresar</a>
+    
+    <li ><a href="#method-i-msj_error_clave">#msj_error_clave</a>
+    
+    <li ><a href="#method-i-nombre_usuario_logueado">#nombre_usuario_logueado</a>
+    
+    <li ><a href="#method-i-regexp_clave">#regexp_clave</a>
+    
+    <li ><a href="#method-i-tipo_encriptacion">#tipo_encriptacion</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./CaracterNoValidoError.html">CaracterNoValidoError</a>
+  
+    <li><a href="./Controlador.html">Controlador</a>
+  
+    <li><a href="./EncriptadorBCrypt.html">EncriptadorBCrypt</a>
+  
+    <li><a href="./EncriptadorCaesar.html">EncriptadorCaesar</a>
+  
+    <li><a href="./EncriptadorTextoPlano.html">EncriptadorTextoPlano</a>
+  
+    <li><a href="./ManejadorUsuarios.html">ManejadorUsuarios</a>
+  
+    <li><a href="./NoHayUsuarioLogueadoError.html">NoHayUsuarioLogueadoError</a>
+  
+    <li><a href="./Usuario.html">Usuario</a>
+  
+    <li><a href="./UsuarioOClaveError.html">UsuarioOClaveError</a>
+  
+    <li><a href="./UsuarioYaExistenteError.html">UsuarioYaExistenteError</a>
+  
+    <li><a href="./UsuarioYaLogueadoError.html">UsuarioYaLogueadoError</a>
+  
+    <li><a href="./Vista.html">Vista</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Controlador</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-manejador" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">manejador</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+        <span class="ruby-ivar">@manejador</span>   = <span class="ruby-constant">ManejadorUsuarios</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-comment"># agrego el usuario de prueba</span>
+        <span class="ruby-identifier">crear_usuario</span>(<span class="ruby-string">&quot;admin&quot;</span>, <span class="ruby-string">&quot;admin&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-cambiar_encriptacion_bcrypt" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cambiar_encriptacion_bcrypt</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Cambia el tipo de encriptación a BCrypt en el manejador</p>
+          
+          
+
+          
+          <div class="method-source-code" id="cambiar_encriptacion_bcrypt-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cambiar_encriptacion_bcrypt</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">cambiar_encriptacion_bcrypt</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cambiar_encriptacion_bcrypt-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cambiar_encriptacion_bcrypt-method -->
+
+    
+      <div id="method-i-cambiar_encriptacion_caesar" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cambiar_encriptacion_caesar</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Cambia el tipo de encriptación a Caesar&#39;s Cypher en el manejador</p>
+          
+          
+
+          
+          <div class="method-source-code" id="cambiar_encriptacion_caesar-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cambiar_encriptacion_caesar</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">cambiar_encriptacion_caesar</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cambiar_encriptacion_caesar-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cambiar_encriptacion_caesar-method -->
+
+    
+      <div id="method-i-cambiar_encriptacion_texto_plano" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cambiar_encriptacion_texto_plano</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Cambia el tipo de encriptación a texto plano en el manejador</p>
+          
+          
+
+          
+          <div class="method-source-code" id="cambiar_encriptacion_texto_plano-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cambiar_encriptacion_texto_plano</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">cambiar_encriptacion_texto_plano</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cambiar_encriptacion_texto_plano-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cambiar_encriptacion_texto_plano-method -->
+
+    
+      <div id="method-i-cerrar_sesion" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cerrar_sesion</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Cierra la sesión del usuario actual</p>
+          
+          
+
+          
+          <div class="method-source-code" id="cerrar_sesion-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cerrar_sesion</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">cerrar_sesion</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cerrar_sesion-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cerrar_sesion-method -->
+
+    
+      <div id="method-i-crear_usuario" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">crear_usuario</span><span
+            class="method-args">(usuario, clave)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Crea un usuario nuevo</p>
+          
+          
+
+          
+          <div class="method-source-code" id="crear_usuario-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">crear_usuario</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">agregar_usuario</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- crear_usuario-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- crear_usuario-method -->
+
+    
+      <div id="method-i-hay_usuario_logueado-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hay_usuario_logueado?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Indica si hay algún usuario logueado en el sistema actualmente</p>
+          
+          
+
+          
+          <div class="method-source-code" id="hay_usuario_logueado-3F-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hay_usuario_logueado?</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">hay_usuario_logueado?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hay_usuario_logueado-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hay_usuario_logueado-3F-method -->
+
+    
+      <div id="method-i-ingresar" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ingresar</span><span
+            class="method-args">(usuario, clave)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>intenta ingresar al sistema con el usuario y la clave enviados</p>
+          
+          
+
+          
+          <div class="method-source-code" id="ingresar-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ingresar</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">ingresar</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- ingresar-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ingresar-method -->
+
+    
+      <div id="method-i-msj_error_clave" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">msj_error_clave</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Devuelve el mensaje de error asociado a la regexp de ingreso de claves del
+encriptador actual. Elmensaje se muestra si la clave ingresada no cumple
+con la regexp</p>
+          
+          
+
+          
+          <div class="method-source-code" id="msj_error_clave-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">msj_error_clave</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">msj_error_clave</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- msj_error_clave-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- msj_error_clave-method -->
+
+    
+      <div id="method-i-nombre_usuario_logueado" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">nombre_usuario_logueado</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="nombre_usuario_logueado-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">nombre_usuario_logueado</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">nombre_usuario_logueado</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- nombre_usuario_logueado-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- nombre_usuario_logueado-method -->
+
+    
+      <div id="method-i-regexp_clave" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">regexp_clave</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Devuelve la regexp a utilizarse para el ingreso de claves del encriptador
+actual</p>
+          
+          
+
+          
+          <div class="method-source-code" id="regexp_clave-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">regexp_clave</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">regexp_clave</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- regexp_clave-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- regexp_clave-method -->
+
+    
+      <div id="method-i-tipo_encriptacion" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tipo_encriptacion</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Devuelve un String con el nombre del tipo de encriptación actual</p>
+          
+          
+
+          
+          <div class="method-source-code" id="tipo_encriptacion-source">
+            <pre><span class="ruby-comment"># File controlador.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tipo_encriptacion</span>
+        <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">tipo_encriptacion</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- tipo_encriptacion-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- tipo_encriptacion-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
