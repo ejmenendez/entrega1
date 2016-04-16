@@ -1,4 +1,5 @@
 require_relative 'controlador'
+include HighLine::SystemExtensions
 
 class Vista
 	attr_reader :controlador
@@ -14,7 +15,8 @@ class Vista
 		salir = false
 		
 		while !salir do 
-			say "Tipo de encriptación: #{controlador.tipo_encriptacion}"
+			puts "Tipo de encriptación: \e[34m#{controlador.tipo_encriptacion}\e[0m"
+					
 			choose do |menu| 
 				
 				# la opción de login se muestra sólo si no hay usuario logueados
@@ -56,11 +58,11 @@ class Vista
 			usuario = ask("Ingrese su usuario: ") {}
 			clave = ingresar_clave
 			controlador.ingresar(usuario, clave)
-			puts "Ingreso exitoso!"
+			mensaje_ok "Ingreso exitoso!"
 		rescue UsuarioOClaveError 
-			puts "El usuario o la clave ingresada son incorrectos"
+			mensaje_error "El usuario o la clave ingresada son incorrectos"
 		rescue UsuarioYaLogueadoError
-			puts "Ya hay una sesión activa"
+			mensaje_error "Ya hay una sesión activa"
 			mostrar_estado
 		end
 	end
@@ -74,16 +76,16 @@ class Vista
 			
 			if clave.eql? conf_clave
 				controlador.crear_usuario(usuario, clave)
-				puts "Usuario creado!"
+				mensaje_ok "Usuario creado!"
 			else
-				puts "Las claves ingresadas no coinciden!"
+				mensaje_error "Las claves ingresadas no coinciden!"
 			end
 	
 		rescue UsuarioYaExistenteError
-			puts "El usuario que intenta crear ya existe"
+			mensaje_error "El usuario que intenta crear ya existe"
 		rescue CaracterNoValidoError
 			# En caso que haya llegado al servidor una clave con algún caracter incorrecto
-			puts "La clave elegida contiene caracteres erróneos"
+			mensaje_error "La clave elegida contiene caracteres erróneos"
 		end
 	end
 	
@@ -105,6 +107,7 @@ class Vista
 		end
 		
 		cargar_validador_clave
+		mensaje_ok "Encriptación cambiada a: #{controlador.tipo_encriptacion}"
 	end
 	
 	# Espera el ingreso de una cadena que se va a utilizar como clave, si se envía una
@@ -131,13 +134,13 @@ class Vista
 	def mostrar_estado
 		begin
 			if @controlador.hay_usuario_logueado?
-				puts "Su sesión está activa con el usuario: #{@controlador.nombre_usuario_logueado}"
+				mensaje_info "Su sesión está activa con el usuario: #{@controlador.nombre_usuario_logueado}"
 			else
-				puts "Usted no ha iniciado sesión"
+				mensaje_error "Usted no ha iniciado sesión"
 			end
 		rescue NoHayUsuarioLogueadoError
 			# No debería suceder...
-			puts "No hay usuario con sesión activa para mostrar!!"
+			mensaje_error "No hay usuario con sesión activa para mostrar!!"
 		end
 	end
 	
@@ -147,8 +150,35 @@ class Vista
 			@controlador.cerrar_sesion
 		rescue
 			# No debería suceder...
-			puts "No hay usuario con sesión activa en éste momento!!"
+			mensaje_error "No hay usuario con sesión activa en éste momento!!"
 		end
+	end
+	
+	# Muestra un mensaje de error y espera a que se presione enter
+	def mensaje_error(mensaje)
+		mostrar_mensaje 31,mensaje
+	end
+	
+	# Muestra un mensaje de éxito y espera a que se presione enter
+	def mensaje_ok(mensaje)
+		mostrar_mensaje 32,mensaje
+	end
+	
+	# Muestra un mensaje informativo y espera a que se presione enter
+	def mensaje_info(mensaje)
+		mostrar_mensaje 34,mensaje
+	end
+	
+	# Muestra un mensaje con el color enviado por parámetro 
+	# Luego espera a que se presione enter
+	def mostrar_mensaje(color = 37, mensaje)
+		puts "\e[#{color}m#{mensaje}\e[0m"
+		presione_una_tecla
+	end
+	
+	# espera a que se presione enter
+	def presione_una_tecla
+		ask("Presione ENTER para continuar...") {|q| q.echo = false}
 	end
 	
 end
