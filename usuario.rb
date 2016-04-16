@@ -15,7 +15,7 @@ class Usuario
 	end
 	
 	# Cambia el estado a no logueado
-	def salida 
+	def cerrar_sesion 
 		@esta_logueado = false
 	end
 

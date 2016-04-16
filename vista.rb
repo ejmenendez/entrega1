@@ -1,6 +1,4 @@
 require_relative 'controlador'
-require_relative 'usuario_o_clave_error'
-require_relative 'usuario_ya_existente_error'
 
 class Vista
 	attr_reader :controlador

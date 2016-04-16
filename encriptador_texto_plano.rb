@@ -1,4 +1,4 @@
-class Encriptador
+class EncriptadorTextoPlano
 	
 	attr_reader :tipo_encriptacion
 	

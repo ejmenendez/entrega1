@@ -9,9 +9,9 @@ class Controlador
 	attr_reader :manejador
 	
 	def initialize
-		# @encriptador = Encriptador.new
-		# @encriptador = EncriptadorCaesar.new(3)
-		@encriptador = EncriptadorBCrypt.new
+		#@encriptador = EncriptadorTextoPlano.new
+		@encriptador = EncriptadorCaesar.new(3)
+		# @encriptador = EncriptadorBCrypt.new
 		@manejador   = Manejador_usuarios.new
 		# agrego el usuario de prueba
 		crear_usuario("admin", "ADMIN")
