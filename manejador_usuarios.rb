@@ -17,7 +17,7 @@ class ManejadorUsuarios
 	
 	# Inicializa la lista de usuarios y carga el encriptador por defecto
 	def initialize
-		cambiar_encriptacion_caesar
+		cambiar_encriptacion_texto_plano
 		@lista_usuarios = []
 	end
 	
