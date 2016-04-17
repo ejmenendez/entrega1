@@ -20,7 +20,7 @@ class Vista
 		
 		while !salir do 
 			# Informa la encriptación que se está utilizando actualmente
-			puts "Tipo de encriptación: \e[34m#{controlador.tipo_encriptacion}\e[0m"
+			puts "Tipo de encriptación: \e[34m#{@controlador.tipo_encriptacion}\e[0m"
 					
 			choose do |menu| 
 				
@@ -52,6 +52,7 @@ class Vista
 				end
 				
 				menu.choice(:Salir) do
+					mensaje_info "Saliendo del programa."
 					salir = true
 				end
 			end
@@ -64,7 +65,7 @@ class Vista
 		begin
 			usuario = ask("Ingrese su usuario: ") {}
 			clave = ingresar_clave
-			controlador.ingresar(usuario, clave)
+			@controlador.ingresar(usuario, clave)
 			mensaje_ok "Ingreso exitoso!"
 		rescue UsuarioOClaveError 
 			mensaje_error "El usuario o la clave ingresada son incorrectos"
@@ -86,7 +87,7 @@ class Vista
 			conf_clave = ingresar_clave(@regexp_clave , @msj_error_clave , "Confirme la clave: ")
 			
 			if clave.eql? conf_clave
-				controlador.crear_usuario(usuario, clave)
+				@controlador.crear_usuario(usuario, clave)
 				mensaje_ok "Usuario creado!"
 			else
 				mensaje_error "Las claves ingresadas no coinciden!"
@@ -120,7 +121,7 @@ class Vista
 		end
 		
 		cargar_validador_clave
-		mensaje_ok "Encriptación cambiada a: #{controlador.tipo_encriptacion}"
+		mensaje_ok "Encriptación cambiada a: #{@controlador.tipo_encriptacion}"
 	end
 	
 	# Espera el ingreso de una cadena que se va a utilizar como clave, si se envía una
@@ -161,6 +162,7 @@ class Vista
 	# Cierra la sesión del usuario actual
 	def cerrar_sesion
 		begin
+			mensaje_ok "Cerrando la sesión para el usuario #{@controlador.nombre_usuario_logueado}"
 			@controlador.cerrar_sesion
 		rescue NoHayUsuarioLogueadoError
 			# En caso que falle el menú y se quiera cerrar sesión sin haber usuarios logueados

@@ -1,11 +1,12 @@
 require_relative 'manejador_usuarios'
 
+# Hace de inerfaz entre la vista y los modelos. 
 class Controlador
-	attr_reader :manejador
-	
+
+	# Crea una instancia del manejador de usuarios.
+	# Crea un usuario de prueba 
 	def initialize
 		@manejador   = ManejadorUsuarios.new
-		# agrego el usuario de prueba
 		crear_usuario("admin", "admin")
 	end
 	
@@ -55,6 +56,7 @@ class Controlador
 		@manejador.msj_error_clave
 	end
 	
+	# Devuelve el nombre del usuario que tiene sesión activa al momento de ser invocado.
 	def nombre_usuario_logueado
 		@manejador.nombre_usuario_logueado
 	end
