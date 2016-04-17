@@ -15,18 +15,34 @@ class EncriptadorTextoPlano
 	# para la clave
 	def initialize
 		@tipo_encriptacion = 'Texto Plano'
-		@regexp_clave = nil
-		@msj_error_clave = nil
+		@regexp_clave = /\A[A-Za-z0-9_\-\.]{4,}\z/
+		@msj_error_clave = "La clave debe tener al menos 4 caracteres. \nLos caracteres permitidos son: letras, números, _, - y ."
 	end
 	
 	# Como es texto plano, se devuelve la misma cadena enviada
+	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def encriptar(clave)
-		clave
+		if cadena_valida? clave
+			clave
+		else
+			raise CaracterNoValidoError.new 
+		end
+	end
+	
+	# Valida que la clave sean sólo letras, números, guiones y puntos
+	# Con un largo mínimo de 4 caracteres
+	def cadena_valida?(cadena)
+		cadena.match(/^[A-Za-z0-9_\-\.]{4,}$/) { |m| m != nil }
 	end
 	
 	# Valida que uns cadena enviada y una clave  sean iguales
+	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def validar_clave(cadena, clave)
-		clave.eql? cadena
+		if cadena_valida? clave
+			clave.eql? cadena
+		else
+			raise CaracterNoValidoError.new 
+		end
 	end
 	
 end

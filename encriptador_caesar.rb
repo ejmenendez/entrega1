@@ -23,8 +23,8 @@ class EncriptadorCaesar
 	# la cadena que se quiere encriptar o desencriptar
 	def initialize(lugares = 3, abecedario = ('A'..'Z').to_a.join)
 		# Defino los caracteres que pueden usarse en la clave y el mensaje de error
-		@regexp_clave = /[A-Za-z]/
-		@msj_error_clave = "La clave debe contener sólo caracteres de la A a la Z"
+		@regexp_clave = /[A-Za-z]{4,}/
+		@msj_error_clave = "La clave debe contener sólo caracteres de la A a la Z y debe tener al menos 4 caracteres"
 		
 		i = lugares % abecedario.size 
 		@desencriptado = abecedario
@@ -33,34 +33,37 @@ class EncriptadorCaesar
 		@tipo_encriptacion = "Caesar's Cypher"
 	end
 	
-	# Encripta la clave enviada. Debe ser alfabética. Convierte la cadena
-	# enviada a mayúsculas
+	# Encripta la clave enviada. Debe ser alfabética. 
+	# Convierte la cadena enviada a mayúsculas
 	def encriptar(clave)
 		if cadena_valida? clave
 			clave.upcase.tr(@desencriptado, @encriptado)
 		else
-			raise CaracterNoValidoError.new clave
+			raise CaracterNoValidoError.new 
 		end
 	end
 	
-	# Desencripta la clave enviada. Debe ser alfabética. Convierte la cadena
-	# enviada a mayúsculas
+	# Desencripta la clave enviada. Debe ser alfabética. 
+	# Convierte la cadena enviada a mayúsculas
+	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def desencriptar(clave)
 		if cadena_valida? clave
 			clave.upcase.tr(@encriptado, @desencriptado)
 		else
-			raise CaracterNoValidoError.new clave
+			raise CaracterNoValidoError.new 
 		end
 	end
 	
 	# Valida que la clave sean sólo letras A - Z
+	# Con un largo mínimo de 4 caracteres
 	def cadena_valida?(cadena)
-		cadena.match(/[A-Za-z]/) { |m| m != nil }
+		cadena.match(/^[A-Za-z]{4,}$/) { |m| m != nil }
 	end
 	
 	# Valida que una cadena enviada y una clave encriptada sean iguales
-	# cuando la clave se desencripta. Convierte la cadena que se quiere comparar
-	# con la clave a mayúsculas
+	# cuando la clave se desencripta. 
+	# Convierte la cadena que se quiere comparar con la clave a mayúsculas
+	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def validar_clave(cadena, clave)
 		(desencriptar clave).eql? cadena.upcase
 	end
