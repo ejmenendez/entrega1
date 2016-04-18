@@ -58,7 +58,7 @@ en el directorio donde descargó/descomprimió el programa.
 
 ##Instrucciones de uso del programa
 
-Ver el archivo Instrucciones.pdf
+Ver el archivo **Instrucciones de uso CMD.pdf** incluído.
 
 ##Ejecución de los tests
 
