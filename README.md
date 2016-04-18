@@ -54,8 +54,11 @@ ingresando en la consola:
 ```
 $ ruby cmd.rb
 ```
-
 en el directorio donde descargó/descomprimió el programa.
+
+##Instrucciones de uso del programa
+
+Ver el archivo Instrucciones.pdf
 
 ##Ejecución de los tests
 
@@ -65,33 +68,30 @@ En la línea de comando ingrese
 $ rspec
 ```
 Y verá los resultados de los tests a medida que se ejecutan. Al mismo tiempo **SimpleCov**,
-si fue instalado, genera estadísticas de los tests en el directorio *coverage*.
+si fue instalado, genera estadísticas de los tests en el directorio **coverage**.
 
 ###Clases testeadas
 
-* EncriptadorBCrypt
-	Métodos testeados:
+Las clases de RSpec se encuentran en el directorio **rspec**.
+
+* EncriptadorBCrypt - mensajes:
 	1. #encriptar
 	2. #cadena_valida?
 	3. #clave_valida?
-* EncriptadorCaesar
-	Métodos testeados:
+* EncriptadorCaesar - mensajes:
 	1. #encriptar
 	2. #desencriptar
 	3. #cadena_valida?
 	4. #clave_valida?
-* EncriptadorTextoPlano
-	Métodos testeados:
+* EncriptadorTextoPlano - mensajes:
 	1. #encriptar
 	2. #cadena_valida?
 	3. #clave_valida?
-* Usuario
-	Métodos testeados:
+* Usuario - mensajes:
 	1. #initialize
 	2. #iniciar_sesion
 	3. #cerrar_sesion
-* ManejadorUsuarios
-	Métodos testeados:
+* ManejadorUsuarios - mensajes:
 	1. #initialize
 	2. #hay_usuario_logueado?
 	3. #agregar_usuario
@@ -112,6 +112,10 @@ si fue instalado, genera estadísticas de los tests en el directorio *coverage*.
 * Vista
 * Controlador
 * Encriptador (posee métodos abstractos)
+
+##Documentación de las clases
+
+La documentación de las clases en *HTML* generada con **RDoc** se encuentra en el directorio **doc**.
 
 ##Autor
 
