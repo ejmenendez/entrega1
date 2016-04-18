@@ -1,11 +1,13 @@
 require_relative 'controlador'
 
-# Dibuja el menú principal, los submenús y los mensajes.
+# Dibuja el menú principal, los submenús y los mensajes.<br>
+# Envía al controlador los datos ingresados por el usuario para iniciar, cerrar sesión
+# crear usuarios o verificar el estado actual
 class Vista
 		
-	# Instancia el controlador.
+	# Instancia el controlador.<br>
 	# Asigna los valores para validar la clave de acuerdo a la encriptación que se esté
-	# utilizando.
+	# utilizando.<br>
 	# Dibuja el menú principal
 	def initialize
 		@controlador 		= Controlador.new
@@ -82,8 +84,8 @@ class Vista
 		end
 	end
 	
-	# Método que toma los datos para la creación de un usuario nuevo e intenta crearlo:
-	# se ingresa el usuario y la clave dos veces para confirmarlas.
+	# Método que toma los datos para la creación de un usuario nuevo e intenta crearlo:<br>
+	# se ingresa el usuario y la clave dos veces para confirmarlas.<br>
 	# Las claves ingresadas deben coincidir para poder dar de alta al usuario,
 	# y no debe haber otro usuario con el mismo nombre.
 	def crear_usuario
@@ -143,10 +145,10 @@ class Vista
 		ingresar_datos(/\A[A-Za-z0-9_\-\.]{4,}\z/, "El usuario debe tener al menos 4 caracteres \ny sólo puede contener letras, números, puntos y guiones (- y _)", "Ingrese el usuario: ")
 	end
 	
-	# Espera el ingreso de una cadena. 
-	# Muestra el texto enviado por parámetro
-	# Si se envía una regular expression valida que lo ingresado coincida
-	# con la misma, en caso de error muestra un mensaje enviado por parámetro u otro por defecto.
+	# Espera el ingreso de una cadena. <br>
+	# Muestra el texto enviado por parámetro.<br>
+	# Si se envía una regular expression, valida que lo ingresado coincida con la misma, si esto no sucede 
+	# muestra un mensaje enviado por parámetro u otro por defecto.<br>
 	# Se le puede enviar un caracter para que muestre por cada caracter ingresado, por defecto
 	# muestra lo que se va ingresando
 	def ingresar_datos(regexp = nil, mensaje = nil, texto = ">>", echo = true)		
@@ -159,14 +161,15 @@ class Vista
 		end
 	end
 	
-	# Carga la regexp y el mensaje a utilizar para validar las claves ingresadas
-	# según el método de encriptación que se utiliza
+	# Asigna a la regexp y el mensaje de error a utilizar para validar las claves ingresadas
+	# los valores que envía el controlador
 	def cargar_validador_clave
 		@regexp_clave 	 = @controlador.regexp_clave
 		@msj_error_clave = @controlador.msj_error_clave
 	end
 	
-	# Muestra el estado actual del usuario, si está logueado o no
+	# Muestra si hay algún usuario con sesión iniciada actualmente.<br>
+	# Si es así, muestra el nombre de dicho usuario.<br>
 	def mostrar_estado
 		begin
 			if @controlador.hay_usuario_logueado?
@@ -181,7 +184,7 @@ class Vista
 		end
 	end
 	
-	# Cierra la sesión del usuario actual
+	# Cierra la sesión actual.
 	def cerrar_sesion
 		begin
 			mensaje_ok "Cerrando la sesión para el usuario #{@controlador.nombre_usuario_logueado}"
@@ -207,15 +210,16 @@ class Vista
 		mostrar_mensaje 34, mensaje
 	end
 	
-	# Muestra un mensaje con el color enviado por parámetro 
-	# Luego espera a que se presione enter
+	# Muestra un mensaje enviado por parámetro en el color enviado por parámetro.<br>
+	# Luego espera a que se presione enter.<br>
+	# Por defecto el color de la letra es gris.
 	def mostrar_mensaje(color = 37, mensaje)
 		puts "\e[#{color}m#{mensaje}\e[0m"
-		presione_una_tecla
+		presione_enter
 	end
 	
-	# espera a que se presione enter
-	def presione_una_tecla
+	# Espera a que se presione enter
+	def presione_enter
 		ask("Presione ENTER para continuar...") {|q| q.echo = false}
 	end
 	

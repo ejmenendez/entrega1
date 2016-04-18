@@ -7,9 +7,9 @@ require_relative 'encriptador_texto_plano'
 require_relative 'encriptador_caesar'
 require_relative 'encriptador_bcrypt'
 
-# Contiene una lista de usuarios existentes en el sistema. 
+# Contiene una lista de usuarios existentes en el sistema. <br>
 # Realiza las tareas de ingreso, cierre de sesión, cambio de encriptación, y envío
-# de lo datos del usuario con sesión iniciada y el encriptador en uso.
+# de lo datos del usuario con sesión iniciada y el encriptador en uso.<br>
 # Contiene el encriptador que se utiliza para las claves de los usuarios.
 class ManejadorUsuarios
 	# El encriptador que se utiliza en el sistema
@@ -27,8 +27,8 @@ class ManejadorUsuarios
 	end
 	
 	# Agrega un usuario a la lista con el usuario y clave enviados por parámetro
-	# siempre que no exista un usuario igual
-	# Si existe, levanta un UsuarioYaExistenteError
+	# siempre que no exista un usuario igual<br>
+	# Si ya existe, levanta un UsuarioYaExistenteError<br>
 	# Si el nombre de usuario contiene caracteres incorrectos, levanta un CaracterNoValidoError
 	def agregar_usuario(usuario, clave)
 		nombre_usuario_valido? usuario
@@ -40,10 +40,10 @@ class ManejadorUsuarios
 		@lista_usuarios.push(Usuario.new(usuario, @encriptador.encriptar(clave)))
 	end
 	
-	# Comprueba si el usuario y la clave enviados pertenecen a algún usuario que esté
-	# actualmente en la colección. Si son correctos, ingresa al sistema con el usuario
-	# y la clave enviados. Si son incorrectos, levanta UsuarioOClaveError
-	# Si ya hay un usuario logueado, levanta un UsuarioYaLogueadoError
+	# Comprueba si el usuario y la clave enviados pertenecen a algún usuario que esté<br>
+	# actualmente en la colección. Si son correctos, ingresa al sistema con el usuario<br>
+	# y la clave enviados. Si son incorrectos, levanta UsuarioOClaveError.<br>
+	# Si ya hay un usuario logueado, levanta un UsuarioYaLogueadoError<br>
 	# Si el nombre de usuario contiene caracteres incorrectos, levanta un CaracterNoValidoError
 	def ingresar(usuario, clave)
 		nombre_usuario_valido? usuario
@@ -68,7 +68,7 @@ class ManejadorUsuarios
 		end
 	end
 	
-	# Comprueba que un nombre de usuario tenga solamente caracteres válidos
+	# Comprueba que un nombre de usuario tenga solamente caracteres válidos<br>
 	# Si no es así, levanta CaracterNoValidoError
 	def nombre_usuario_valido?(nombre_usuario)
 		if nombre_usuario.match(/\A[A-Za-z0-9_\-\.]{4,}\z/) { |m| m != nil }
@@ -104,18 +104,18 @@ class ManejadorUsuarios
 	end
 	
 	# Devuelve el mensaje de error asociado a la regexp de ingreso de claves del encriptador
-	# actual. Elmensaje se muestra si la clave ingresada no cumple con la regexp
+	# actual.
 	def msj_error_clave
 		@encriptador.msj_error_clave
 	end
 	
-	# Devuelve el nick del usuario logueado actualmente, si hay alguno
+	# Devuelve el nick del usuario logueado actualmente, si hay alguno.<br>
 	# Si no hay ninguno, devuelve un NoHayUsuarioLogueadoError
 	def nombre_usuario_logueado	
 		usuario_logueado.usuario
 	end
 	
-	# Devuelve el usuario logueado actualmente
+	# Devuelve el usuario logueado actualmente.<br>
 	# Si no hay ninguno, levanta un NoHayUsuarioLogueadoError
 	def usuario_logueado
 		if hay_usuario_logueado?
@@ -127,7 +127,7 @@ class ManejadorUsuarios
 		end
 	end	
 	
-	# Cierra la sesión del usuario actual
+	# Cierra la sesión del usuario actual.<br>
 	# Si no hay ninguno, devuelve un NoHayUsuarioLogueadoError
 	def cerrar_sesion
 		usuario_logueado.cerrar_sesion

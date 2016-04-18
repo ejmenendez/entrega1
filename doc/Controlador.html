@@ -114,6 +114,12 @@
   
     <li class="file"><a href="./README_md.html">README</a>
   
+    <li class="file"><a href="./coverage/assets/0_10_0/application_css.html">application.css</a>
+  
+    <li class="file"><a href="./coverage/assets/0_10_0/application_js.html">application.js</a>
+  
+    <li class="file"><a href="./coverage/index_html.html">index.html</a>
+  
     <li class="file"><a href="./doc/created_rid.html">created.rid</a>
   
   </ul>
@@ -159,6 +165,8 @@
 
   <div id="description" class="description">
     
+<p>Hace de inerfaz entre la vista y los modelos.</p>
+
   </div><!-- description -->
 
   
@@ -171,26 +179,6 @@
 
     
 
-    
-    <!-- Attributes -->
-    <section id="attribute-method-details" class="method-section section">
-      <h3 class="section-header">Attributes</h3>
-
-      
-      <div id="attribute-i-manejador" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">manejador</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-    </section><!-- attribute-method-details -->
     
 
     <!-- Methods -->
@@ -212,16 +200,15 @@
 
         <div class="method-description">
           
-          
+          <p>Crea una instancia del manejador de usuarios.<br> Crea un usuario de prueba</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 6</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
         <span class="ruby-ivar">@manejador</span>   = <span class="ruby-constant">ManejadorUsuarios</span>.<span class="ruby-identifier">new</span>
-        <span class="ruby-comment"># agrego el usuario de prueba</span>
         <span class="ruby-identifier">crear_usuario</span>(<span class="ruby-string">&quot;admin&quot;</span>, <span class="ruby-string">&quot;admin&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
@@ -259,7 +246,7 @@
 
           
           <div class="method-source-code" id="cambiar_encriptacion_bcrypt-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 43</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cambiar_encriptacion_bcrypt</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">cambiar_encriptacion_bcrypt</span>
 <span class="ruby-keyword">end</span></pre>
@@ -292,7 +279,7 @@
 
           
           <div class="method-source-code" id="cambiar_encriptacion_caesar-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 38</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cambiar_encriptacion_caesar</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">cambiar_encriptacion_caesar</span>
 <span class="ruby-keyword">end</span></pre>
@@ -325,7 +312,7 @@
 
           
           <div class="method-source-code" id="cambiar_encriptacion_texto_plano-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 33</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cambiar_encriptacion_texto_plano</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">cambiar_encriptacion_texto_plano</span>
 <span class="ruby-keyword">end</span></pre>
@@ -358,7 +345,7 @@
 
           
           <div class="method-source-code" id="cerrar_sesion-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 63</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cerrar_sesion</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">cerrar_sesion</span>
 <span class="ruby-keyword">end</span></pre>
@@ -391,7 +378,7 @@
 
           
           <div class="method-source-code" id="crear_usuario-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 28</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">crear_usuario</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">agregar_usuario</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -424,7 +411,7 @@
 
           
           <div class="method-source-code" id="hay_usuario_logueado-3F-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 18</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hay_usuario_logueado?</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">hay_usuario_logueado?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -457,7 +444,7 @@
 
           
           <div class="method-source-code" id="ingresar-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 23</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ingresar</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">ingresar</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -485,14 +472,13 @@
         <div class="method-description">
           
           <p>Devuelve el mensaje de error asociado a la regexp de ingreso de claves del
-encriptador actual. Elmensaje se muestra si la clave ingresada no cumple
-con la regexp</p>
+encriptador actual.</p>
           
           
 
           
           <div class="method-source-code" id="msj_error_clave-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 54</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">msj_error_clave</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">msj_error_clave</span>
 <span class="ruby-keyword">end</span></pre>
@@ -519,13 +505,14 @@ con la regexp</p>
 
         <div class="method-description">
           
-          
+          <p>Devuelve el nombre del usuario que tiene sesión activa al momento de ser
+invocado.</p>
           
           
 
           
           <div class="method-source-code" id="nombre_usuario_logueado-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 58</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">nombre_usuario_logueado</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">nombre_usuario_logueado</span>
 <span class="ruby-keyword">end</span></pre>
@@ -559,7 +546,7 @@ actual</p>
 
           
           <div class="method-source-code" id="regexp_clave-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 48</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">regexp_clave</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">regexp_clave</span>
 <span class="ruby-keyword">end</span></pre>
@@ -592,7 +579,7 @@ actual</p>
 
           
           <div class="method-source-code" id="tipo_encriptacion-source">
-            <pre><span class="ruby-comment"># File controlador.rb, line 13</span>
+            <pre><span class="ruby-comment"># File controlador.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tipo_encriptacion</span>
         <span class="ruby-ivar">@manejador</span>.<span class="ruby-identifier">tipo_encriptacion</span>
 <span class="ruby-keyword">end</span></pre>

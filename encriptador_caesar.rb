@@ -1,8 +1,10 @@
 require_relative 'caracter_no_valido_error'
 
-# Encripta y valida las claves de usuarios utilizando Caesar's Cypher
-# Los lugares a desplazar son configurables al momento de instanciar, 
-# por defecto es 3.
+# Encripta y valida las claves de usuarios utilizando Caesar's Cypher<br>
+# Desplaza 3 posiciones hacia adelante en el abecedario a cada letra de la cadena que 
+# se quiere encriptar<br>
+# Puede desencriptar una cadena enviada desplazándola 3 posiciones hacia atrás en el abecedario<br>
+# Recibe cadenas que contengan sólo letras, se convierten a mayúsculas<br>
 class EncriptadorCaesar
 		
 	# El nombre del encriptador en formato String
@@ -15,11 +17,11 @@ class EncriptadorCaesar
 	attr_reader :msj_error_clave
 	
 	# Asigna el tipo de encriptción en String, la regular expression y el mensaje de error
-	# para la clave.
-	# La cantidad de lugares a despplazar es 3
-	# Crea un array con caracteres que conforman el abecedario a utilizar, de la A a la Z
+	# para la clave.<br>
+	# La cantidad de lugares a despplazar es 3<br>
+	# Crea un array con caracteres que conforman el abecedario a utilizar, de la A a la Z<br>
 	# Crea dos arrays, uno encriptado y el otro no, para después hacer el reemplazo en 
-	# la cadena que se quiere encriptar o desencriptar
+	# la cadena que se quiere encriptar o desencriptar<br>
 	def initialize
 		# Defino los caracteres que pueden usarse en la clave y el mensaje de error
 		@regexp_clave = /\A[A-Za-z]{4,}\z/
@@ -34,7 +36,7 @@ class EncriptadorCaesar
 		@tipo_encriptacion = "Caesar's Cypher"
 	end
 	
-	# Encripta la clave enviada. Debe ser alfabética. 
+	# Encripta la clave enviada. Debe ser alfabética. <br>
 	# Convierte la cadena enviada a mayúsculas
 	def encriptar(clave)
 		if cadena_valida? clave
@@ -44,8 +46,8 @@ class EncriptadorCaesar
 		end
 	end
 	
-	# Desencripta la clave enviada. Debe ser alfabética. 
-	# Convierte la cadena enviada a mayúsculas
+	# Desencripta la clave enviada. Debe ser alfabética. <br>
+	# Convierte la cadena enviada a mayúsculas<br>
 	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def desencriptar(clave)
 		if cadena_valida? clave
@@ -55,15 +57,15 @@ class EncriptadorCaesar
 		end
 	end
 	
-	# Valida que la clave sean sólo letras A - Z
+	# Valida que la clave sean sólo letras A - Z<br>
 	# Con un largo mínimo de 4 caracteres
 	def cadena_valida?(cadena)
 		cadena.match(@regexp_clave) { |m| m != nil }
 	end
 	
 	# Valida que una cadena enviada y una clave encriptada sean iguales
-	# cuando la clave se desencripta. 
-	# Convierte la cadena que se quiere comparar con la clave a mayúsculas
+	# cuando la clave se desencripta. <br>
+	# Convierte la cadena que se quiere comparar con la clave a mayúsculas<br>
 	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def clave_valida?(cadena, clave)
 		(desencriptar clave).eql? cadena.upcase

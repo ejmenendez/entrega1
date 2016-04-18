@@ -3,7 +3,7 @@ require_relative 'manejador_usuarios'
 # Hace de inerfaz entre la vista y los modelos. 
 class Controlador
 
-	# Crea una instancia del manejador de usuarios.
+	# Crea una instancia del manejador de usuarios.<br>
 	# Crea un usuario de prueba 
 	def initialize
 		@manejador   = ManejadorUsuarios.new
@@ -51,7 +51,7 @@ class Controlador
 	end
 	
 	# Devuelve el mensaje de error asociado a la regexp de ingreso de claves del encriptador
-	# actual. Elmensaje se muestra si la clave ingresada no cumple con la regexp
+	# actual.
 	def msj_error_clave
 		@manejador.msj_error_clave
 	end

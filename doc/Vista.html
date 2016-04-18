@@ -89,6 +89,10 @@
     
     <li ><a href="#method-i-ingresar_clave">#ingresar_clave</a>
     
+    <li ><a href="#method-i-ingresar_datos">#ingresar_datos</a>
+    
+    <li ><a href="#method-i-ingresar_usuario">#ingresar_usuario</a>
+    
     <li ><a href="#method-i-mensaje_error">#mensaje_error</a>
     
     <li ><a href="#method-i-mensaje_info">#mensaje_info</a>
@@ -99,7 +103,7 @@
     
     <li ><a href="#method-i-mostrar_mensaje">#mostrar_mensaje</a>
     
-    <li ><a href="#method-i-presione_una_tecla">#presione_una_tecla</a>
+    <li ><a href="#method-i-presione_enter">#presione_enter</a>
     
   </ul>
 </nav>
@@ -117,6 +121,12 @@
     <li class="file"><a href="./Gemfile_lock.html">Gemfile.lock</a>
   
     <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./coverage/assets/0_10_0/application_css.html">application.css</a>
+  
+    <li class="file"><a href="./coverage/assets/0_10_0/application_js.html">application.js</a>
+  
+    <li class="file"><a href="./coverage/index_html.html">index.html</a>
   
     <li class="file"><a href="./doc/created_rid.html">created.rid</a>
   
@@ -163,7 +173,9 @@
 
   <div id="description" class="description">
     
-<p>Dibuja el menú principal, los submenús y los mensajes.</p>
+<p>Dibuja el menú principal, los submenús y los mensajes.<br> Envía al
+controlador los datos ingresados por el usuario para iniciar, cerrar sesión
+crear usuarios o verificar el estado actual</p>
 
   </div><!-- description -->
 
@@ -198,14 +210,15 @@
 
         <div class="method-description">
           
-          <p>Instancia el controlador. Asigna los valores para validar la clave de
-acuerdo a la encriptación que se esté utilizando. Dibuja el menú principal</p>
+          <p>Instancia el controlador.<br> Asigna los valores para validar la clave de
+acuerdo a la encriptación que se esté utilizando.<br> Dibuja el menú
+principal</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 10</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
         <span class="ruby-ivar">@controlador</span>          = <span class="ruby-constant">Controlador</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-identifier">cargar_validador_clave</span>
@@ -247,7 +260,7 @@ validadores de clave que correspondan</p>
 
           
           <div class="method-source-code" id="cambiar_encriptacion-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 106</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cambiar_encriptacion</span>
         <span class="ruby-identifier">choose</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">encriptacion</span><span class="ruby-operator">|</span>
                 
@@ -265,7 +278,7 @@ validadores de clave que correspondan</p>
         <span class="ruby-keyword">end</span>
         
         <span class="ruby-identifier">cargar_validador_clave</span>
-        <span class="ruby-identifier">mensaje_ok</span> <span class="ruby-node">&quot;Encriptación cambiada a: #{controlador.tipo_encriptacion}&quot;</span>
+        <span class="ruby-identifier">mensaje_ok</span> <span class="ruby-node">&quot;Encriptación cambiada a: #{@controlador.tipo_encriptacion}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- cambiar_encriptacion-source -->
           
@@ -290,14 +303,14 @@ validadores de clave que correspondan</p>
 
         <div class="method-description">
           
-          <p>Carga la regexp y el mensaje a utilizar para validar las claves ingresadas
-según el método de encriptación que se utiliza</p>
+          <p>Asigna a la regexp y el mensaje de error a utilizar para validar las claves
+ingresadas los valores que envía el controlador</p>
           
           
 
           
           <div class="method-source-code" id="cargar_validador_clave-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 141</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cargar_validador_clave</span>
         <span class="ruby-ivar">@regexp_clave</span>          = <span class="ruby-ivar">@controlador</span>.<span class="ruby-identifier">regexp_clave</span>
         <span class="ruby-ivar">@msj_error_clave</span> = <span class="ruby-ivar">@controlador</span>.<span class="ruby-identifier">msj_error_clave</span>
@@ -325,15 +338,16 @@ según el método de encriptación que se utiliza</p>
 
         <div class="method-description">
           
-          <p>Cierra la sesión del usuario actual</p>
+          <p>Cierra la sesión actual.</p>
           
           
 
           
           <div class="method-source-code" id="cerrar_sesion-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 162</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 188</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cerrar_sesion</span>
         <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">mensaje_ok</span> <span class="ruby-node">&quot;Cerrando la sesión para el usuario #{@controlador.nombre_usuario_logueado}&quot;</span>
                 <span class="ruby-ivar">@controlador</span>.<span class="ruby-identifier">cerrar_sesion</span>
         <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoHayUsuarioLogueadoError</span>
                 <span class="ruby-comment"># En caso que falle el menú y se quiera cerrar sesión sin haber usuarios logueados</span>
@@ -364,23 +378,25 @@ según el método de encriptación que se utiliza</p>
         <div class="method-description">
           
           <p>Método que toma los datos para la creación de un usuario nuevo e intenta
-crearlo: se ingresa el usuario y la clave dos veces para confirmarlas. Las
-claves ingresadas deben coincidir para poder dar de alta al usuario, y no
-debe haber otro usuario con el mismo nombre.</p>
+crearlo:<br> se ingresa el usuario y la clave dos veces para
+confirmarlas.<br> Las claves ingresadas deben coincidir para poder dar de
+alta al usuario, y no debe haber otro usuario con el mismo nombre.</p>
           
           
 
           
           <div class="method-source-code" id="crear_usuario-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 82</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">crear_usuario</span>
         <span class="ruby-keyword">begin</span>
-                <span class="ruby-identifier">usuario</span> = <span class="ruby-identifier">ask</span>(<span class="ruby-string">&quot;Ingrese usuario: &quot;</span>) {}
+                <span class="ruby-comment"># usuario = ask(&quot;Ingrese usuario: &quot;) {}</span>
+                <span class="ruby-identifier">usuario</span> = <span class="ruby-identifier">ingresar_usuario</span>
+                
                 <span class="ruby-identifier">clave</span> = <span class="ruby-identifier">ingresar_clave</span>(<span class="ruby-ivar">@regexp_clave</span> , <span class="ruby-ivar">@msj_error_clave</span>)
                 <span class="ruby-identifier">conf_clave</span> = <span class="ruby-identifier">ingresar_clave</span>(<span class="ruby-ivar">@regexp_clave</span> , <span class="ruby-ivar">@msj_error_clave</span> , <span class="ruby-string">&quot;Confirme la clave: &quot;</span>)
                 
                 <span class="ruby-keyword">if</span> <span class="ruby-identifier">clave</span>.<span class="ruby-identifier">eql?</span> <span class="ruby-identifier">conf_clave</span>
-                        <span class="ruby-identifier">controlador</span>.<span class="ruby-identifier">crear_usuario</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
+                        <span class="ruby-ivar">@controlador</span>.<span class="ruby-identifier">crear_usuario</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
                         <span class="ruby-identifier">mensaje_ok</span> <span class="ruby-string">&quot;Usuario creado!&quot;</span>
                 <span class="ruby-keyword">else</span>
                         <span class="ruby-identifier">mensaje_error</span> <span class="ruby-string">&quot;Las claves ingresadas no coinciden!&quot;</span>
@@ -391,7 +407,7 @@ debe haber otro usuario con el mismo nombre.</p>
                 <span class="ruby-identifier">mensaje_error</span> <span class="ruby-string">&quot;El usuario que intenta crear ya existe&quot;</span>
         <span class="ruby-keyword">rescue</span> <span class="ruby-constant">CaracterNoValidoError</span>
                 <span class="ruby-comment"># En caso que haya llegado al servidor una clave con algún caracter incorrecto</span>
-                <span class="ruby-identifier">mensaje_error</span> <span class="ruby-string">&quot;La clave elegida contiene caracteres erróneos&quot;</span>
+                <span class="ruby-identifier">mensaje_error</span> <span class="ruby-string">&quot;El usuario y/o la clave elegida contienen caracteres no válidos&quot;</span>
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- crear_usuario-source -->
@@ -424,13 +440,13 @@ de salir del programa</p>
 
           
           <div class="method-source-code" id="dibujar-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 18</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dibujar</span>
         <span class="ruby-identifier">salir</span> = <span class="ruby-keyword">false</span>
         
         <span class="ruby-keyword">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">salir</span> <span class="ruby-keyword">do</span> 
                 <span class="ruby-comment"># Informa la encriptación que se está utilizando actualmente</span>
-                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Tipo de encriptación: \e[34m#{controlador.tipo_encriptacion}\e[0m&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Tipo de encriptación: \e[34m#{@controlador.tipo_encriptacion}\e[0m&quot;</span>
                                 
                 <span class="ruby-identifier">choose</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">menu</span><span class="ruby-operator">|</span> 
                         
@@ -462,6 +478,7 @@ de salir del programa</p>
                         <span class="ruby-keyword">end</span>
                         
                         <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">choice</span>(<span class="ruby-value">:Salir</span>) <span class="ruby-keyword">do</span>
+                                <span class="ruby-identifier">mensaje_info</span> <span class="ruby-string">&quot;Saliendo del programa.&quot;</span>
                                 <span class="ruby-identifier">salir</span> = <span class="ruby-keyword">true</span>
                         <span class="ruby-keyword">end</span>
                 <span class="ruby-keyword">end</span>
@@ -498,19 +515,25 @@ ingresados</p>
 
           
           <div class="method-source-code" id="ingresar-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 63</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ingresar</span>
         <span class="ruby-keyword">begin</span>
-                <span class="ruby-identifier">usuario</span> = <span class="ruby-identifier">ask</span>(<span class="ruby-string">&quot;Ingrese su usuario: &quot;</span>) {}
+                <span class="ruby-comment"># usuario = ask(&quot;Ingrese su usuario: &quot;) {}</span>
+                <span class="ruby-identifier">usuario</span> = <span class="ruby-identifier">ingresar_usuario</span>
+                
+                <span class="ruby-comment"># El usuario debería conocer su clave, por lo que no se chequean los caracteres que ingresa</span>
                 <span class="ruby-identifier">clave</span> = <span class="ruby-identifier">ingresar_clave</span>
-                <span class="ruby-identifier">controlador</span>.<span class="ruby-identifier">ingresar</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
+
+                <span class="ruby-ivar">@controlador</span>.<span class="ruby-identifier">ingresar</span>(<span class="ruby-identifier">usuario</span>, <span class="ruby-identifier">clave</span>)
                 <span class="ruby-identifier">mensaje_ok</span> <span class="ruby-string">&quot;Ingreso exitoso!&quot;</span>
         <span class="ruby-keyword">rescue</span> <span class="ruby-constant">UsuarioOClaveError</span> 
                 <span class="ruby-identifier">mensaje_error</span> <span class="ruby-string">&quot;El usuario o la clave ingresada son incorrectos&quot;</span>
         <span class="ruby-keyword">rescue</span> <span class="ruby-constant">UsuarioYaLogueadoError</span>
                 <span class="ruby-comment"># En caso de fallar el menú y querer ingresar con un usuario ya activo</span>
                 <span class="ruby-identifier">mensaje_error</span> <span class="ruby-string">&quot;Ya hay una sesión activa&quot;</span>
-                <span class="ruby-identifier">mostrar_estado</span>
+        <span class="ruby-keyword">rescue</span> <span class="ruby-constant">CaracterNoValidoError</span>
+                <span class="ruby-comment"># En caso de fallar la validación del usuario en la vista</span>
+                <span class="ruby-identifier">mensaje_error</span> <span class="ruby-string">&quot;El usuario ingresado tiene caracteres no válidos&quot;</span>
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- ingresar-source -->
@@ -536,23 +559,15 @@ ingresados</p>
 
         <div class="method-description">
           
-          <p>Espera el ingreso de una cadena que se va a utilizar como clave, si se
-envía una regular expression valida que lo ingresado sea correcto, en caso
-de error muestra  un mensaje enviado por parámetro u otro por defecto.</p>
+          <p>Espera el ingreso de la cadena que se va a utilizar como clave</p>
           
           
 
           
           <div class="method-source-code" id="ingresar_clave-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 129</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">ingresar_clave</span>(<span class="ruby-identifier">regexp</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">mensaje</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">texto</span> = <span class="ruby-string">&quot;Ingrese clave: &quot;</span>)             
-        <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">texto</span>) <span class="ruby-keyword">do</span>  <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span> 
-                <span class="ruby-identifier">q</span>.<span class="ruby-identifier">echo</span> = <span class="ruby-string">&quot;*&quot;</span>
-                <span class="ruby-keyword">if</span> <span class="ruby-identifier">regexp</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> 
-                        <span class="ruby-identifier">q</span>.<span class="ruby-identifier">validate</span> = <span class="ruby-identifier">regexp</span>  
-                        <span class="ruby-identifier">q</span>.<span class="ruby-identifier">responses</span>[<span class="ruby-value">:not_valid</span>] = <span class="ruby-identifier">mensaje</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">mensaje</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;La clave contiene caracteres incorrectos&quot;</span>
-                <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">end</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ingresar_clave</span>(<span class="ruby-identifier">regexp</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">mensaje</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">texto</span> = <span class="ruby-string">&quot;Ingrese clave: &quot;</span>)
+        <span class="ruby-identifier">ingresar_datos</span>(<span class="ruby-identifier">regexp</span>, <span class="ruby-identifier">mensaje</span>, <span class="ruby-identifier">texto</span>, <span class="ruby-string">&quot;*&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- ingresar_clave-source -->
           
@@ -562,6 +577,84 @@ de error muestra  un mensaje enviado por parámetro u otro por defecto.</p>
 
         
       </div><!-- ingresar_clave-method -->
+
+    
+      <div id="method-i-ingresar_datos" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ingresar_datos</span><span
+            class="method-args">(regexp = nil, mensaje = nil, texto = ">>", echo = true)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Espera el ingreso de una cadena. <br> Muestra el texto enviado por
+parámetro.<br> Si se envía una regular expression, valida que lo ingresado
+coincida con la misma, si esto no sucede  muestra un mensaje enviado por
+parámetro u otro por defecto.<br> Se le puede enviar un caracter para que
+muestre por cada caracter ingresado, por defecto muestra lo que se va
+ingresando</p>
+          
+          
+
+          
+          <div class="method-source-code" id="ingresar_datos-source">
+            <pre><span class="ruby-comment"># File vista.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ingresar_datos</span>(<span class="ruby-identifier">regexp</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">mensaje</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">texto</span> = <span class="ruby-string">&quot;&gt;&gt;&quot;</span>, <span class="ruby-identifier">echo</span> = <span class="ruby-keyword">true</span>)             
+        <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">texto</span>) <span class="ruby-keyword">do</span>  <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span> 
+                <span class="ruby-identifier">q</span>.<span class="ruby-identifier">echo</span> = <span class="ruby-identifier">echo</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">regexp</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> 
+                        <span class="ruby-identifier">q</span>.<span class="ruby-identifier">validate</span> = <span class="ruby-identifier">regexp</span>  
+                        <span class="ruby-identifier">q</span>.<span class="ruby-identifier">responses</span>[<span class="ruby-value">:not_valid</span>] = <span class="ruby-identifier">mensaje</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">mensaje</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;La clave contiene caracteres incorrectos&quot;</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- ingresar_datos-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ingresar_datos-method -->
+
+    
+      <div id="method-i-ingresar_usuario" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ingresar_usuario</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Espera el ingreso de la cadena que se va a utlizar como usuario Caracteres
+permitidos: letras, números, ., - y _</p>
+          
+          
+
+          
+          <div class="method-source-code" id="ingresar_usuario-source">
+            <pre><span class="ruby-comment"># File vista.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ingresar_usuario</span>
+        <span class="ruby-identifier">ingresar_datos</span>(<span class="ruby-regexp">/\A[A-Za-z0-9_\-\.]{4,}\z/</span>, <span class="ruby-string">&quot;El usuario debe tener al menos 4 caracteres \ny sólo puede contener letras, números, puntos y guiones (- y _)&quot;</span>, <span class="ruby-string">&quot;Ingrese el usuario: &quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- ingresar_usuario-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ingresar_usuario-method -->
 
     
       <div id="method-i-mensaje_error" class="method-detail ">
@@ -583,7 +676,7 @@ de error muestra  un mensaje enviado por parámetro u otro por defecto.</p>
 
           
           <div class="method-source-code" id="mensaje_error-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 172</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">mensaje_error</span>(<span class="ruby-identifier">mensaje</span>)
         <span class="ruby-identifier">mostrar_mensaje</span> <span class="ruby-value">31</span>, <span class="ruby-identifier">mensaje</span>
 <span class="ruby-keyword">end</span></pre>
@@ -616,7 +709,7 @@ de error muestra  un mensaje enviado por parámetro u otro por defecto.</p>
 
           
           <div class="method-source-code" id="mensaje_info-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 182</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 209</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">mensaje_info</span>(<span class="ruby-identifier">mensaje</span>)
         <span class="ruby-identifier">mostrar_mensaje</span> <span class="ruby-value">34</span>, <span class="ruby-identifier">mensaje</span>
 <span class="ruby-keyword">end</span></pre>
@@ -649,7 +742,7 @@ de error muestra  un mensaje enviado por parámetro u otro por defecto.</p>
 
           
           <div class="method-source-code" id="mensaje_ok-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 177</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">mensaje_ok</span>(<span class="ruby-identifier">mensaje</span>)
         <span class="ruby-identifier">mostrar_mensaje</span> <span class="ruby-value">32</span>, <span class="ruby-identifier">mensaje</span>
 <span class="ruby-keyword">end</span></pre>
@@ -676,13 +769,14 @@ de error muestra  un mensaje enviado por parámetro u otro por defecto.</p>
 
         <div class="method-description">
           
-          <p>Muestra el estado actual del usuario, si está logueado o no</p>
+          <p>Muestra si hay algún usuario con sesión iniciada actualmente.<br> Si es
+así, muestra el nombre de dicho usuario.<br></p>
           
           
 
           
           <div class="method-source-code" id="mostrar_estado-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 147</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">mostrar_estado</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@controlador</span>.<span class="ruby-identifier">hay_usuario_logueado?</span>
@@ -719,17 +813,18 @@ de error muestra  un mensaje enviado por parámetro u otro por defecto.</p>
 
         <div class="method-description">
           
-          <p>Muestra un mensaje con el color enviado por parámetro  Luego espera a que
-se presione enter</p>
+          <p>Muestra un mensaje enviado por parámetro en el color enviado por
+parámetro.<br> Luego espera a que se presione enter.<br> Por defecto el
+color de la letra es gris.</p>
           
           
 
           
           <div class="method-source-code" id="mostrar_mensaje-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 188</span>
+            <pre><span class="ruby-comment"># File vista.rb, line 216</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">mostrar_mensaje</span>(<span class="ruby-identifier">color</span> = <span class="ruby-value">37</span>, <span class="ruby-identifier">mensaje</span>)
         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\e[#{color}m#{mensaje}\e[0m&quot;</span>
-        <span class="ruby-identifier">presione_una_tecla</span>
+        <span class="ruby-identifier">presione_enter</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- mostrar_mensaje-source -->
           
@@ -741,10 +836,10 @@ se presione enter</p>
       </div><!-- mostrar_mensaje-method -->
 
     
-      <div id="method-i-presione_una_tecla" class="method-detail ">
+      <div id="method-i-presione_enter" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">presione_una_tecla</span><span
+          <span class="method-name">presione_enter</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -754,24 +849,24 @@ se presione enter</p>
 
         <div class="method-description">
           
-          <p>espera a que se presione enter</p>
+          <p>Espera a que se presione enter</p>
           
           
 
           
-          <div class="method-source-code" id="presione_una_tecla-source">
-            <pre><span class="ruby-comment"># File vista.rb, line 194</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">presione_una_tecla</span>
+          <div class="method-source-code" id="presione_enter-source">
+            <pre><span class="ruby-comment"># File vista.rb, line 222</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">presione_enter</span>
         <span class="ruby-identifier">ask</span>(<span class="ruby-string">&quot;Presione ENTER para continuar...&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span> <span class="ruby-identifier">q</span>.<span class="ruby-identifier">echo</span> = <span class="ruby-keyword">false</span>}
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- presione_una_tecla-source -->
+          </div><!-- presione_enter-source -->
           
         </div>
 
         
 
         
-      </div><!-- presione_una_tecla-method -->
+      </div><!-- presione_enter-method -->
 
     
     </section><!-- public-instance-method-details -->

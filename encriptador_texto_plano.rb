@@ -1,4 +1,4 @@
-# No implementa encriptación, las claves son guardadas tal como son enviadas.
+# No implementa encriptación, las claves son guardadas tal como son enviadas.<br>
 # Valida una cadena enviada comparándola con una clave almacenada
 class EncriptadorTextoPlano
 	
@@ -19,7 +19,7 @@ class EncriptadorTextoPlano
 		@msj_error_clave = "La clave debe tener al menos 4 caracteres. \nLos caracteres permitidos son: letras, números, _, - y ."
 	end
 	
-	# Como es texto plano, se devuelve la misma cadena enviada
+	# Como es texto plano, se devuelve la misma cadena enviada<br>
 	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def encriptar(clave)
 		if cadena_valida? clave
@@ -29,13 +29,13 @@ class EncriptadorTextoPlano
 		end
 	end
 	
-	# Valida que la clave sean sólo letras, números, guiones y puntos
-	# Con un largo mínimo de 4 caracteres
+	# Valida que la clave sean sólo letras, números, guiones y puntos,
+	# con un largo mínimo de 4 caracteres
 	def cadena_valida?(cadena)
 		cadena.match(@regexp_clave) { |m| m != nil }
 	end
 	
-	# Valida que uns cadena enviada y una clave  sean iguales
+	# Valida que uns cadena enviada y una clave  sean iguales<br>
 	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def clave_valida?(cadena, clave)
 		if cadena_valida? clave

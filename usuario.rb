@@ -1,5 +1,6 @@
-# Representa un usuario del sistema.
-# Indica si el usuario al que representa la instancia tiene o no sesión activa.
+# Representa un usuario del sistema, guardando su usuario, contraseña y
+# si tiene o no sesión iniciada.<br>
+# No implementa acciones, las mismas son llevadas a cabo por el manejador.
 class Usuario
 	# El nombre de usuario elegido
 	attr_reader :usuario
@@ -8,7 +9,7 @@ class Usuario
 	# Indica si es el usuario con sesión activa o no
 	attr_reader	:esta_logueado
 	
-	# El nombre del usuario y la clave se asignan al momento de la creación
+	# El nombre del usuario y la clave se asignan al momento de la creación.<br>
 	# Por defecto, al momento de la ceación el usuario no tiene sesión activa
 	def initialize(usuario_inicial, clave_inicial)
 		@usuario = usuario_inicial

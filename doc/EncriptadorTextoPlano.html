@@ -75,9 +75,11 @@
     
     <li ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-encriptar">#encriptar</a>
+    <li ><a href="#method-i-cadena_valida-3F">#cadena_valida?</a>
     
-    <li ><a href="#method-i-validar_clave">#validar_clave</a>
+    <li ><a href="#method-i-clave_valida-3F">#clave_valida?</a>
+    
+    <li ><a href="#method-i-encriptar">#encriptar</a>
     
   </ul>
 </nav>
@@ -95,6 +97,12 @@
     <li class="file"><a href="./Gemfile_lock.html">Gemfile.lock</a>
   
     <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./coverage/assets/0_10_0/application_css.html">application.css</a>
+  
+    <li class="file"><a href="./coverage/assets/0_10_0/application_js.html">application.js</a>
+  
+    <li class="file"><a href="./coverage/index_html.html">index.html</a>
   
     <li class="file"><a href="./doc/created_rid.html">created.rid</a>
   
@@ -141,8 +149,9 @@
 
   <div id="description" class="description">
     
-<p>No implementa encriptación, las claves son guardadas tal como son enviadas.
-Valida una cadena enviada comparándola con una clave almacenada</p>
+<p>No implementa encriptación, las claves son guardadas tal como son
+enviadas.<br> Valida una cadena enviada comparándola con una clave
+almacenada</p>
 
   </div><!-- description -->
 
@@ -235,8 +244,8 @@ de error para la clave</p>
             <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
         <span class="ruby-ivar">@tipo_encriptacion</span> = <span class="ruby-string">&#39;Texto Plano&#39;</span>
-        <span class="ruby-ivar">@regexp_clave</span> = <span class="ruby-keyword">nil</span>
-        <span class="ruby-ivar">@msj_error_clave</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-ivar">@regexp_clave</span> = <span class="ruby-regexp">/\A[A-Za-z0-9_\-\.]{4,}\z/</span>
+        <span class="ruby-ivar">@msj_error_clave</span> = <span class="ruby-string">&quot;La clave debe tener al menos 4 caracteres. \nLos caracteres permitidos son: letras, números, _, - y .&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -254,6 +263,79 @@ de error para la clave</p>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
+      <div id="method-i-cadena_valida-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cadena_valida?</span><span
+            class="method-args">(cadena)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Valida que la clave sean sólo letras, números, guiones y puntos, con un
+largo mínimo de 4 caracteres</p>
+          
+          
+
+          
+          <div class="method-source-code" id="cadena_valida-3F-source">
+            <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cadena_valida?</span>(<span class="ruby-identifier">cadena</span>)
+        <span class="ruby-identifier">cadena</span>.<span class="ruby-identifier">match</span>(<span class="ruby-ivar">@regexp_clave</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cadena_valida-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cadena_valida-3F-method -->
+
+    
+      <div id="method-i-clave_valida-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">clave_valida?</span><span
+            class="method-args">(cadena, clave)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Valida que uns cadena enviada y una clave  sean iguales<br> Si la cadena
+enviada no es válida, levanta  <a
+href="CaracterNoValidoError.html">CaracterNoValidoError</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="clave_valida-3F-source">
+            <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">clave_valida?</span>(<span class="ruby-identifier">cadena</span>, <span class="ruby-identifier">clave</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">cadena_valida?</span> <span class="ruby-identifier">clave</span>
+                <span class="ruby-identifier">clave</span>.<span class="ruby-identifier">eql?</span> <span class="ruby-identifier">cadena</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">raise</span> <span class="ruby-constant">CaracterNoValidoError</span>.<span class="ruby-identifier">new</span> 
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- clave_valida-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- clave_valida-3F-method -->
+
+    
       <div id="method-i-encriptar" class="method-detail ">
         
         <div class="method-heading">
@@ -267,15 +349,21 @@ de error para la clave</p>
 
         <div class="method-description">
           
-          <p>Como es texto plano, se devuelve la misma cadena enviada</p>
+          <p>Como es texto plano, se devuelve la misma cadena enviada<br> Si la cadena
+enviada no es válida, levanta  <a
+href="CaracterNoValidoError.html">CaracterNoValidoError</a></p>
           
           
 
           
           <div class="method-source-code" id="encriptar-source">
-            <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 23</span>
+            <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">encriptar</span>(<span class="ruby-identifier">clave</span>)
-        <span class="ruby-identifier">clave</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">cadena_valida?</span> <span class="ruby-identifier">clave</span>
+                <span class="ruby-identifier">clave</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">raise</span> <span class="ruby-constant">CaracterNoValidoError</span>.<span class="ruby-identifier">new</span> 
+        <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- encriptar-source -->
           
@@ -285,39 +373,6 @@ de error para la clave</p>
 
         
       </div><!-- encriptar-method -->
-
-    
-      <div id="method-i-validar_clave" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">validar_clave</span><span
-            class="method-args">(cadena, clave)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Valida que uns cadena enviada y una clave  sean iguales</p>
-          
-          
-
-          
-          <div class="method-source-code" id="validar_clave-source">
-            <pre><span class="ruby-comment"># File encriptador_texto_plano.rb, line 28</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">validar_clave</span>(<span class="ruby-identifier">cadena</span>, <span class="ruby-identifier">clave</span>)
-        <span class="ruby-identifier">clave</span>.<span class="ruby-identifier">eql?</span> <span class="ruby-identifier">cadena</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- validar_clave-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- validar_clave-method -->
 
     
     </section><!-- public-instance-method-details -->

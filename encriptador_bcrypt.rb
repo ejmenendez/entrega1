@@ -20,7 +20,7 @@ class EncriptadorBCrypt
 		@msj_error_clave = "La clave debe tener al menos 4 caracteres \nLos caracteres permitidos son: letras, números, _, - y ."
 	end
 	
-	# Devuelve un hash de BCrypt nuevo, creado a partir de la cadena enviada
+	# Devuelve un hash de BCrypt nuevo, creado a partir de la cadena enviada<br>
 	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
 	def encriptar(clave)
 		if cadena_valida? clave
@@ -30,8 +30,8 @@ class EncriptadorBCrypt
 		end
 	end
 	
-	# Valida que la clave sean sólo letras, números, guiones y puntos
-	# Con un largo mínimo de 4 caracteres
+	# Valida que la clave sean sólo letras, números, guiones y puntos,
+	# con un largo mínimo de 4 caracteres
 	def cadena_valida?(cadena)
 		cadena.match(@regexp_clave) { |m| m != nil }
 	end
