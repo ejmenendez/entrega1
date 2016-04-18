@@ -32,12 +32,12 @@ class EncriptadorTextoPlano
 	# Valida que la clave sean sólo letras, números, guiones y puntos
 	# Con un largo mínimo de 4 caracteres
 	def cadena_valida?(cadena)
-		cadena.match(/^[A-Za-z0-9_\-\.]{4,}$/) { |m| m != nil }
+		cadena.match(@regexp_clave) { |m| m != nil }
 	end
 	
 	# Valida que uns cadena enviada y una clave  sean iguales
 	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
-	def validar_clave(cadena, clave)
+	def clave_valida?(cadena, clave)
 		if cadena_valida? clave
 			clave.eql? cadena
 		else

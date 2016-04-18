@@ -29,7 +29,10 @@ class ManejadorUsuarios
 	# Agrega un usuario a la lista con el usuario y clave enviados por parámetro
 	# siempre que no exista un usuario igual
 	# Si existe, levanta un UsuarioYaExistenteError
+	# Si el nombre de usuario contiene caracteres incorrectos, levanta un CaracterNoValidoError
 	def agregar_usuario(usuario, clave)
+		nombre_usuario_valido? usuario
+				
 		if @lista_usuarios.any? { |usr| usr.usuario.eql? usuario }
 			# ya existe el usuario
 			raise UsuarioYaExistenteError.new
@@ -38,15 +41,19 @@ class ManejadorUsuarios
 	end
 	
 	# Comprueba si el usuario y la clave enviados pertenecen a algún usuario que esté
-	# actualmente en la colección
+	# actualmente en la colección. Si son correctos, ingresa al sistema con el usuario
+	# y la clave enviados. Si son incorrectos, levanta UsuarioOClaveError
 	# Si ya hay un usuario logueado, levanta un UsuarioYaLogueadoError
+	# Si el nombre de usuario contiene caracteres incorrectos, levanta un CaracterNoValidoError
 	def ingresar(usuario, clave)
+		nombre_usuario_valido? usuario
+		
 		if ! hay_usuario_logueado?
 			
 			@lista_usuarios.each do |usr| 
 				if usr.usuario.eql? usuario 
 					# si el usuario existe, se comprueba la clave
-					if @encriptador.validar_clave(clave, usr.clave)
+					if @encriptador.clave_valida?(clave, usr.clave)
 						usr.iniciar_sesion
 						# éste return debe ser explícito
 						return true
@@ -58,6 +65,16 @@ class ManejadorUsuarios
 			raise UsuarioOClaveError.new 
 		else
 			raise UsuarioYaLogueadoError.new
+		end
+	end
+	
+	# Comprueba que un nombre de usuario tenga solamente caracteres válidos
+	# Si no es así, levanta CaracterNoValidoError
+	def nombre_usuario_valido?(nombre_usuario)
+		if nombre_usuario.match(/\A[A-Za-z0-9_\-\.]{4,}\z/) { |m| m != nil }
+			true
+		else
+			raise CaracterNoValidoError.new
 		end
 	end
 	

@@ -23,7 +23,7 @@ class EncriptadorCaesar
 	# la cadena que se quiere encriptar o desencriptar
 	def initialize(lugares = 3, abecedario = ('A'..'Z').to_a.join)
 		# Defino los caracteres que pueden usarse en la clave y el mensaje de error
-		@regexp_clave = /[A-Za-z]{4,}/
+		@regexp_clave = /\A[A-Za-z]{4,}\z/
 		@msj_error_clave = "La clave debe contener sólo caracteres de la A a la Z y debe tener al menos 4 caracteres"
 		
 		i = lugares % abecedario.size 
@@ -57,14 +57,14 @@ class EncriptadorCaesar
 	# Valida que la clave sean sólo letras A - Z
 	# Con un largo mínimo de 4 caracteres
 	def cadena_valida?(cadena)
-		cadena.match(/^[A-Za-z]{4,}$/) { |m| m != nil }
+		cadena.match(@regexp_clave) { |m| m != nil }
 	end
 	
 	# Valida que una cadena enviada y una clave encriptada sean iguales
 	# cuando la clave se desencripta. 
 	# Convierte la cadena que se quiere comparar con la clave a mayúsculas
 	# Si la cadena enviada no es válida, levanta  CaracterNoValidoError
-	def validar_clave(cadena, clave)
+	def clave_valida?(cadena, clave)
 		(desencriptar clave).eql? cadena.upcase
 	end
 	

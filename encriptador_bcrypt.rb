@@ -33,14 +33,14 @@ class EncriptadorBCrypt
 	# Valida que la clave sean sólo letras, números, guiones y puntos
 	# Con un largo mínimo de 4 caracteres
 	def cadena_valida?(cadena)
-		cadena.match(/^[A-Za-z0-9_\-\.]{4,}$/) { |m| m != nil }
+		cadena.match(@regexp_clave) { |m| m != nil }
 	end
 
 	# Valida que uns cadena enviado y una clave encriptada sean iguales
 	# cuando la cadena se encripta
-	def validar_clave(cadena, clave)
+	def clave_valida?(cadena, clave)
 		# la clave recibida debería ser una instancia de bcrypt, por lo tanto 
-		# no se valida
+		# implementa la comparación con ==
 		clave == cadena
 	end
 end

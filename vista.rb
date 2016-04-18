@@ -63,8 +63,12 @@ class Vista
 	# Método que toma los datos e intenta ingresar con el usuario y clave ingresados
 	def ingresar
 		begin
-			usuario = ask("Ingrese su usuario: ") {}
+			# usuario = ask("Ingrese su usuario: ") {}
+			usuario = ingresar_usuario
+			
+			# El usuario debería conocer su clave, por lo que no se chequean los caracteres que ingresa
 			clave = ingresar_clave
+
 			@controlador.ingresar(usuario, clave)
 			mensaje_ok "Ingreso exitoso!"
 		rescue UsuarioOClaveError 
@@ -72,7 +76,9 @@ class Vista
 		rescue UsuarioYaLogueadoError
 			# En caso de fallar el menú y querer ingresar con un usuario ya activo
 			mensaje_error "Ya hay una sesión activa"
-			mostrar_estado
+		rescue CaracterNoValidoError
+			# En caso de fallar la validación del usuario en la vista
+			mensaje_error "El usuario ingresado tiene caracteres no válidos"
 		end
 	end
 	
@@ -82,7 +88,9 @@ class Vista
 	# y no debe haber otro usuario con el mismo nombre.
 	def crear_usuario
 		begin
-			usuario = ask("Ingrese usuario: ") {}
+			# usuario = ask("Ingrese usuario: ") {}
+			usuario = ingresar_usuario
+			
 			clave = ingresar_clave(@regexp_clave , @msj_error_clave)
 			conf_clave = ingresar_clave(@regexp_clave , @msj_error_clave , "Confirme la clave: ")
 			
@@ -98,7 +106,7 @@ class Vista
 			mensaje_error "El usuario que intenta crear ya existe"
 		rescue CaracterNoValidoError
 			# En caso que haya llegado al servidor una clave con algún caracter incorrecto
-			mensaje_error "La clave elegida contiene caracteres erróneos"
+			mensaje_error "El usuario y/o la clave elegida contienen caracteres no válidos"
 		end
 	end
 	
@@ -124,12 +132,26 @@ class Vista
 		mensaje_ok "Encriptación cambiada a: #{@controlador.tipo_encriptacion}"
 	end
 	
-	# Espera el ingreso de una cadena que se va a utilizar como clave, si se envía una
-	# regular expression valida que lo ingresado sea correcto, en caso de error muestra 
-	# un mensaje enviado por parámetro u otro por defecto.
-	def ingresar_clave(regexp = nil, mensaje = nil, texto = "Ingrese clave: ")		
+	# Espera el ingreso de la cadena que se va a utilizar como clave
+	def ingresar_clave(regexp = nil, mensaje = nil, texto = "Ingrese clave: ")
+		ingresar_datos(regexp, mensaje, texto, "*")
+	end
+	
+	# Espera el ingreso de la cadena que se va a utlizar como usuario
+	# Caracteres permitidos: letras, números, ., - y _
+	def ingresar_usuario
+		ingresar_datos(/\A[A-Za-z0-9_\-\.]{4,}\z/, "El usuario debe tener al menos 4 caracteres \ny sólo puede contener letras, números, puntos y guiones (- y _)", "Ingrese el usuario: ")
+	end
+	
+	# Espera el ingreso de una cadena. 
+	# Muestra el texto enviado por parámetro
+	# Si se envía una regular expression valida que lo ingresado coincida
+	# con la misma, en caso de error muestra un mensaje enviado por parámetro u otro por defecto.
+	# Se le puede enviar un caracter para que muestre por cada caracter ingresado, por defecto
+	# muestra lo que se va ingresando
+	def ingresar_datos(regexp = nil, mensaje = nil, texto = ">>", echo = true)		
 		ask(texto) do  |q| 
-			q.echo = "*"
+			q.echo = echo
 			if regexp != nil 
 				q.validate = regexp  
 				q.responses[:not_valid] = mensaje != nil ? mensaje : "La clave contiene caracteres incorrectos"

@@ -37,16 +37,16 @@ describe EncriptadorBCrypt do
 		end
 	end
 	
-	describe "validar_clave" do
+	describe "clave_valida?" do
 		
 		it "Valida dos claves iguales" do
 			encriptada = encriptador.encriptar "unaClave" 
-			expect(encriptador.validar_clave "unaClave", encriptada).to be true
+			expect(encriptador.clave_valida? "unaClave", encriptada).to be true
 		end
 		
 		it "Si la clave es distinta a la encriptada, no es válida" do
 			encriptada = encriptador.encriptar "unaClave" 
-			expect(encriptador.validar_clave "otraClave", encriptada).to be false
+			expect(encriptador.clave_valida? "otraClave", encriptada).to be false
 		end
 	
 	end

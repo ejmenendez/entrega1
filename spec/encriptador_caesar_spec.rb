@@ -55,16 +55,16 @@ describe EncriptadorCaesar do
 		end
 	end
 	
-	describe "validar_clave" do
+	describe "clave_valida?" do
 		
 		it "Valida dos claves iguales" do
 			encriptada = encriptador.encriptar "CLAVE" 
-			expect(encriptador.validar_clave "CLAVE", encriptada).to be true
+			expect(encriptador.clave_valida? "CLAVE", encriptada).to be true
 		end
 		
 		it "Si la clave es distinta a la encriptada, no es válida" do
 			encriptada = encriptador.encriptar "CLAVE" 
-			expect(encriptador.validar_clave "OTRACLAVE", encriptada).to be false
+			expect(encriptador.clave_valida? "OTRACLAVE", encriptada).to be false
 		end
 	
 	end

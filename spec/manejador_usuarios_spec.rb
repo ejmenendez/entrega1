@@ -54,6 +54,12 @@ describe ManejadorUsuarios do
 			expect(manejador.ingresar "admin", "admin").to be true
 		end	
 		
+		it "No se pueden agregar usuarios con caracteres no válidos en el nombre" do
+			expect {
+				manejador.agregar_usuario "%admin!", "admin"
+				}.to raise_error CaracterNoValidoError
+		end
+		
 		it "No debería poder agregar otro usuario con el mismo nombre" do
 			expect {
 				manejador.agregar_usuario "admin", "admin"
@@ -98,6 +104,25 @@ describe ManejadorUsuarios do
 				manejador.ingresar "otroUsuario", "otraClave"
 				}.to raise_error UsuarioYaLogueadoError
 		end
+		
+		it "Intento de ingreso con un usuario con caracteres no válidos en el nombre" do
+			expect {
+				manejador.agregar_usuario "%admin!", "admin"
+				}.to raise_error CaracterNoValidoError
+		end
+	end
+	
+	describe "nombre_usuario_valido?" do
+		
+		it "Si el nombre de usuario es válido, devuelve true" do
+			expect(manejador.nombre_usuario_valido? "admin").to be true
+		end
+		
+		it "Si el nombre de usuario tiene algún caracter no válido se levanta error" do
+			expect {
+					manejador.nombre_usuario_valido? "%admin!"
+					}.to raise_error CaracterNoValidoError
+		end
 	end
 	
 	describe "tipo_encriptador" do
@@ -111,27 +136,27 @@ describe ManejadorUsuarios do
 	
 	describe "cambiar_encriptacion_texto_plano" do
 		
-		it "El manejador tiene unainstancia de EncriptadortextoPlano" do
+		it "El manejador tiene una instancia de EncriptadortextoPlano" do
 			manejador.cambiar_encriptacion_texto_plano
-			expect(manejador.tipo_encriptacion).to eql EncriptadorTextoPlano.new.tipo_encriptacion
+			expect(manejador.encriptador).to be_kind_of(EncriptadorTextoPlano)
 		end
 
 	end
 	
 	describe "cambiar_encriptacion_caesar" do
 		
-		it "El manejador tiene unainstancia de EncriptadorCaesar" do
+		it "El manejador tiene una instancia de EncriptadorCaesar" do
 			manejador.cambiar_encriptacion_caesar
-			expect(manejador.tipo_encriptacion).to eql EncriptadorCaesar.new.tipo_encriptacion
+			expect(manejador.encriptador).to be_kind_of(EncriptadorCaesar)
 		end
 
 	end
 	
 	describe "cambiar_encriptacion_bcrypt" do
 		
-		it "El manejador tiene unainstancia de EncriptadorBCrypt" do
+		it "El manejador tiene una instancia de EncriptadorBCrypt" do
 			manejador.cambiar_encriptacion_bcrypt
-			expect(manejador.tipo_encriptacion).to eql EncriptadorBCrypt.new.tipo_encriptacion
+			expect(manejador.encriptador).to be_kind_of(EncriptadorBCrypt)
 		end
 
 	end
