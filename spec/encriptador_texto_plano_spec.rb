@@ -4,9 +4,6 @@ require 'spec_helper'
 describe EncriptadorTextoPlano do
 	let (:encriptador) {EncriptadorTextoPlano.new}
 	
-	# el initialize no hace más que asignar variables en este caso, por lo que
-	# no veo la forma de testearlo
-	
 	describe "encriptar" do
 	
 		it "NO se encripta la clave enviada, por lo que debería ser igual" do

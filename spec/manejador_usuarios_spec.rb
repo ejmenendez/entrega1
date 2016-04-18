@@ -169,7 +169,7 @@ describe ManejadorUsuarios do
 		end
 	end
 	
-	describe "regexp_clave" do
+	describe "msj_error_clave" do
 		it "Los strings del mensaje de error del encriptador y del manejador son iguales" do
 			manejador.cambiar_encriptacion_bcrypt
 			expect(manejador.msj_error_clave).to eql EncriptadorBCrypt.new.msj_error_clave

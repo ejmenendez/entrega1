@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-04-18T01:55:03-03:00">2016-04-18T01:55:03-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-04-18T14:05:46-03:00">2016-04-18T14:05:46-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -143,7 +143,7 @@
       <tr>
         <td class="strong"><a href="#d7fa6ba188783d4029b7598cd8976d243fe4dddc" class="src_link" title="spec/encriptador_texto_plano_spec.rb">spec/encriptador_texto_plano_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>80</td>
+        <td>77</td>
         <td>37</td>
         <td>37</td>
         <td>0</td>
@@ -3198,445 +3198,427 @@
           <code class="ruby">	</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="7">
-          
-          
-          <code class="ruby">	# el initialize no hace más que asignar variables en este caso, por lo que</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="8">
-          
-          
-          <code class="ruby">	# no veo la forma de testearlo</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="9">
-          
-          
-          <code class="ruby">	</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="10">
+        <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
           <code class="ruby">	describe &quot;encriptar&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="11">
+        <li class="never" data-hits="" data-linenumber="8">
           
           
           <code class="ruby">	</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="12">
+        <li class="covered" data-hits="1" data-linenumber="9">
           <span class="hits">1</span>
           
           <code class="ruby">		it &quot;NO se encripta la clave enviada, por lo que debería ser igual&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="13">
+        <li class="covered" data-hits="1" data-linenumber="10">
           <span class="hits">1</span>
           
           <code class="ruby">			clave = &quot;clave1._-&quot; </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="14">
+        <li class="covered" data-hits="1" data-linenumber="11">
           <span class="hits">1</span>
           
           <code class="ruby">			encriptada = encriptador.encriptar clave</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="15">
+        <li class="never" data-hits="" data-linenumber="12">
           
           
           <code class="ruby">			</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="16">
+        <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
           <code class="ruby">			expect(encriptada).to eql clave</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="17">
+        <li class="never" data-hits="" data-linenumber="14">
           
           
           <code class="ruby">			</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="18">
+        <li class="covered" data-hits="1" data-linenumber="15">
           <span class="hits">1</span>
           
           <code class="ruby">			expect(EncriptadorTextoPlano.new.encriptar &quot;clave1._-&quot;).to eql encriptada</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="19">
+        <li class="never" data-hits="" data-linenumber="16">
           
           
           <code class="ruby">		end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="20">
+        <li class="never" data-hits="" data-linenumber="17">
           
           
           <code class="ruby">		</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="18">
           <span class="hits">1</span>
           
           <code class="ruby">		it &quot;Se produce una excepción si envío una clave con caracteres no permitidos &quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="22">
+        <li class="covered" data-hits="1" data-linenumber="19">
           <span class="hits">1</span>
           
           <code class="ruby">			expect {</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="23">
+        <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
           <code class="ruby">				encriptador.encriptar &quot;clave!&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="21">
           
           
           <code class="ruby">				}.to raise_error CaracterNoValidoError</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">		end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby">		</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="24">
+          
+          
+          <code class="ruby">	end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="25">
           
           
-          <code class="ruby">		end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="26">
-          
-          
-          <code class="ruby">		</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="27">
-          
-          
-          <code class="ruby">	end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="28">
-          
-          
           <code class="ruby">	</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="29">
+        <li class="covered" data-hits="1" data-linenumber="26">
           <span class="hits">1</span>
           
           <code class="ruby">	describe &quot;cadena_valida?&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="30">
+        <li class="never" data-hits="" data-linenumber="27">
           
           
           <code class="ruby">	</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="31">
+        <li class="covered" data-hits="1" data-linenumber="28">
           <span class="hits">1</span>
           
           <code class="ruby">		it &quot;La clave con caracteres permitidos devuelve verdadero en la validación&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="32">
+        <li class="covered" data-hits="1" data-linenumber="29">
           <span class="hits">1</span>
           
           <code class="ruby">			expect(encriptador.cadena_valida? &quot;unaClave-._&quot; ).to be true</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="33">
+        <li class="never" data-hits="" data-linenumber="30">
           
           
           <code class="ruby">		end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="34">
+        <li class="never" data-hits="" data-linenumber="31">
           
           
           <code class="ruby">		</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="35">
+        <li class="covered" data-hits="1" data-linenumber="32">
           <span class="hits">1</span>
           
           <code class="ruby">		it &quot;Clave con caracteres no válidos&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="36">
+        <li class="covered" data-hits="1" data-linenumber="33">
           <span class="hits">1</span>
           
           <code class="ruby">			expect {</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="37">
+        <li class="covered" data-hits="1" data-linenumber="34">
           <span class="hits">1</span>
           
           <code class="ruby">				encriptador.cadena_valida? &quot;una clave&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="38">
+        <li class="never" data-hits="" data-linenumber="35">
           
           
           <code class="ruby">				}.to raise_error CaracterNoValidoError</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="never" data-hits="" data-linenumber="36">
           
           
           <code class="ruby">				</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="40">
+        <li class="covered" data-hits="1" data-linenumber="37">
           <span class="hits">1</span>
           
           <code class="ruby">			expect {</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="41">
+        <li class="covered" data-hits="1" data-linenumber="38">
           <span class="hits">1</span>
           
           <code class="ruby">				encriptador.cadena_valida? &quot;%$#!=&quot; </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="42">
+        <li class="never" data-hits="" data-linenumber="39">
           
           
           <code class="ruby">				}.to raise_error CaracterNoValidoError</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="43">
+        <li class="never" data-hits="" data-linenumber="40">
           
           
           <code class="ruby">		end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="44">
+        <li class="never" data-hits="" data-linenumber="41">
           
           
           <code class="ruby">		</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="45">
+        <li class="covered" data-hits="1" data-linenumber="42">
           <span class="hits">1</span>
           
           <code class="ruby">		it &quot;Si tiene menos de 4 caracteres no es válida&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="46">
+        <li class="covered" data-hits="1" data-linenumber="43">
           <span class="hits">1</span>
           
           <code class="ruby">			expect {</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="47">
+        <li class="covered" data-hits="1" data-linenumber="44">
           <span class="hits">1</span>
           
           <code class="ruby">				encriptador.cadena_valida? &quot;&quot; </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="48">
+        <li class="never" data-hits="" data-linenumber="45">
           
           
           <code class="ruby">				}.to raise_error CaracterNoValidoError</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="49">
+        <li class="never" data-hits="" data-linenumber="46">
           
           
           <code class="ruby">			</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="50">
+        <li class="covered" data-hits="1" data-linenumber="47">
           <span class="hits">1</span>
           
           <code class="ruby">			expect {</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="51">
+        <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
           <code class="ruby">				encriptador.cadena_valida? &quot;123&quot; </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="52">
+        <li class="never" data-hits="" data-linenumber="49">
           
           
           <code class="ruby">				}.to raise_error CaracterNoValidoError</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="53">
+        <li class="never" data-hits="" data-linenumber="50">
           
           
           <code class="ruby">		end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="never" data-hits="" data-linenumber="51">
           
           
           <code class="ruby">	end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="never" data-hits="" data-linenumber="52">
           
           
           <code class="ruby">	</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="56">
+        <li class="covered" data-hits="1" data-linenumber="53">
           <span class="hits">1</span>
           
           <code class="ruby">	describe &quot;clave_valida?&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="57">
+        <li class="never" data-hits="" data-linenumber="54">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="58">
+        <li class="covered" data-hits="4" data-linenumber="55">
           <span class="hits">4</span>
           
           <code class="ruby">		let	(:encriptada) {encriptador.encriptar &quot;unaClave&quot;}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="59">
+        <li class="never" data-hits="" data-linenumber="56">
           
           
           <code class="ruby">		</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="60">
+        <li class="covered" data-hits="1" data-linenumber="57">
           <span class="hits">1</span>
           
           <code class="ruby">		it &quot;Valida dos claves iguales&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="61">
+        <li class="covered" data-hits="1" data-linenumber="58">
           <span class="hits">1</span>
           
           <code class="ruby">			expect(encriptador.clave_valida? &quot;unaClave&quot;, encriptada).to be true</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="62">
+        <li class="never" data-hits="" data-linenumber="59">
           
           
           <code class="ruby">		end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="63">
+        <li class="never" data-hits="" data-linenumber="60">
           
           
           <code class="ruby">		</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="64">
+        <li class="covered" data-hits="1" data-linenumber="61">
           <span class="hits">1</span>
           
           <code class="ruby">		it &quot;Si la clave es distinta a la encriptada, no es válida&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="65">
+        <li class="covered" data-hits="1" data-linenumber="62">
           <span class="hits">1</span>
           
           <code class="ruby">			expect(encriptador.clave_valida? &quot;otraClave&quot;, encriptada).to be false</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="66">
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby">		end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="67">
+        <li class="never" data-hits="" data-linenumber="64">
           
           
           <code class="ruby">		</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="68">
+        <li class="covered" data-hits="1" data-linenumber="65">
           <span class="hits">1</span>
           
           <code class="ruby">		it &quot;Claves con caracteres inválidos o menos de 4 caracteres&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="69">
+        <li class="covered" data-hits="1" data-linenumber="66">
           <span class="hits">1</span>
           
           <code class="ruby">			expect {</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="70">
+        <li class="covered" data-hits="1" data-linenumber="67">
           <span class="hits">1</span>
           
           <code class="ruby">				encriptador.clave_valida? &quot;%clave!&quot;, encriptada</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="never" data-hits="" data-linenumber="68">
           
           
           <code class="ruby">				}.to raise_error CaracterNoValidoError</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="never" data-hits="" data-linenumber="69">
           
           
           <code class="ruby">			</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="73">
+        <li class="covered" data-hits="1" data-linenumber="70">
           <span class="hits">1</span>
           
           <code class="ruby">			expect {</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="74">
+        <li class="covered" data-hits="1" data-linenumber="71">
           <span class="hits">1</span>
           
           <code class="ruby">				encriptador.clave_valida? &quot;123&quot;, encriptada </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="75">
+        <li class="never" data-hits="" data-linenumber="72">
           
           
           <code class="ruby">				}.to raise_error CaracterNoValidoError</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="76">
+        <li class="never" data-hits="" data-linenumber="73">
           
           
           <code class="ruby">		end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="77">
+        <li class="never" data-hits="" data-linenumber="74">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="78">
+        <li class="never" data-hits="" data-linenumber="75">
           
           
           <code class="ruby">	end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="79">
+        <li class="never" data-hits="" data-linenumber="76">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="80">
+        <li class="never" data-hits="" data-linenumber="77">
           
           
           <code class="ruby">end</code>
@@ -4689,7 +4671,7 @@
         <li class="covered" data-hits="1" data-linenumber="172">
           <span class="hits">1</span>
           
-          <code class="ruby">	describe &quot;regexp_clave&quot; do</code>
+          <code class="ruby">	describe &quot;msj_error_clave&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="173">
