@@ -46,27 +46,48 @@ describe EncriptadorCaesar do
 		end
 		
 		it "Si tiene al menos un caracter no alfabético, no es válida" do
-			expect(encriptador.cadena_valida? "CLAVE1" ).to be nil
-			expect(encriptador.cadena_valida? "111111" ).to be nil
+			expect {
+				encriptador.cadena_valida? "CLAVE1"
+				}.to raise_error CaracterNoValidoError
+				
+			expect {
+				encriptador.cadena_valida? "!#$%&" 
+				}.to raise_error CaracterNoValidoError
 		end
 		
 		it "Si tiene menos de 4 caracteres no es válida" do
-			expect(encriptador.cadena_valida? "" ).to be nil
-			expect(encriptador.cadena_valida? "CLA" ).to be nil
+			expect {
+				encriptador.cadena_valida? "" 
+				}.to raise_error CaracterNoValidoError
+			
+			expect {
+				encriptador.cadena_valida? "CLA" 
+				}.to raise_error CaracterNoValidoError
 		end
 	end
 	
 	describe "clave_valida?" do
 		
+		let	(:encriptada) {encriptador.encriptar "CLAVE"}
+		
 		it "Valida dos claves iguales" do
-			encriptada = encriptador.encriptar "CLAVE" 
 			expect(encriptador.clave_valida? "CLAVE", encriptada).to be true
 		end
 		
 		it "Si la clave es distinta a la encriptada, no es válida" do
-			encriptada = encriptador.encriptar "CLAVE" 
 			expect(encriptador.clave_valida? "OTRACLAVE", encriptada).to be false
 		end
+		
+		it "Claves con caracteres inválidos o menos de 4 caracteres" do
+			expect {
+				encriptador.clave_valida? "1CLAVE!", encriptada
+				}.to raise_error CaracterNoValidoError
+			
+			expect {
+				encriptador.clave_valida? "ABC", encriptada 
+				}.to raise_error CaracterNoValidoError
+		end
+
 	
 	end
 	

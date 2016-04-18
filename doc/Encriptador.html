@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class EncriptadorCaesar - RDoc Documentation</title>
+<title>class Encriptador - RDoc Documentation</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -49,7 +49,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>encriptador_caesar.rb
+    <li>encriptador.rb
   </ul>
 </nav>
 
@@ -61,7 +61,7 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="Encriptador.html">Encriptador</a>
+  <p class="link">Object
   
 </nav>
 
@@ -73,11 +73,11 @@
 
   <ul class="link-list">
     
-    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-cadena_valida-3F">#cadena_valida?</a>
     
     <li ><a href="#method-i-clave_valida-3F">#clave_valida?</a>
-    
-    <li ><a href="#method-i-desencriptar">#desencriptar</a>
     
     <li ><a href="#method-i-encriptar">#encriptar</a>
     
@@ -147,15 +147,12 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class EncriptadorCaesar</h1>
+  <h1 class="class">class Encriptador</h1>
 
   <div id="description" class="description">
     
-<p>Encripta y valida las claves de usuarios utilizando Caesar&#39;s Cypher<br>
-Desplaza 3 posiciones hacia adelante en el abecedario a cada letra de la
-cadena que  se quiere encriptar<br> Puede desencriptar una cadena enviada
-desplazándola 3 posiciones hacia atrás en el abecedario<br> Recibe cadenas
-que contengan sólo letras, se convierten a mayúsculas<br></p>
+<p>Superclase para los encriptadores.<br> Solamente implementa el método opara
+validar cadenas, los demás se deben implementar en las subclases.</p>
 
   </div><!-- description -->
 
@@ -170,6 +167,54 @@ que contengan sólo letras, se convierten a mayúsculas<br></p>
     
 
     
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-msj_error_clave" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">msj_error_clave</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Mensaje de error para ser mostrado si el usuario ingresa una cadena que no
+cumple con la regular expression asignada</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-regexp_clave" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">regexp_clave</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Regular expression que se necesita para validar la clave cuando es
+ingresada por el  usuario en la vista</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-tipo_encriptacion" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">tipo_encriptacion</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>El nombre del encriptador en formato String</p>
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
 
     <!-- Methods -->
     
@@ -181,7 +226,7 @@ que contengan sólo letras, se convierten a mayúsculas<br></p>
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">()</span>
+            class="method-args">(tipo_encriptacion, regexp_clave, msj_error_clave)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -190,31 +235,18 @@ que contengan sólo letras, se convierten a mayúsculas<br></p>
 
         <div class="method-description">
           
-          <p>Asigna el tipo de encriptción en String, la regular expression y el mensaje
-de error para la clave.<br> La cantidad de lugares a despplazar es 3<br>
-Crea un array con caracteres que conforman el abecedario a utilizar, de la
-A a la Z<br> Crea dos arrays, uno encriptado y el otro no, para después
-hacer el reemplazo en  la cadena que se quiere encriptar o desencriptar<br></p>
+          <p>Asigna el tipo de encriptación en String, la regular expression y el
+mensaje de error para la clave</p>
           
-          
-            <div class="method-calls-super">
-              Calls superclass method
-              <a href="Encriptador.html#method-c-new">Encriptador.new</a>
-            </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File encriptador_caesar.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-        <span class="ruby-comment"># Defino los caracteres que pueden usarse en la clave y el mensaje de error</span>
-        <span class="ruby-keyword">super</span> <span class="ruby-string">&quot;Caesar&#39;s Cypher&quot;</span>, <span class="ruby-regexp">/\A[A-Za-z]{4,}\z/</span>, <span class="ruby-string">&quot;La clave debe contener sólo caracteres de la A a la Z y debe tener al menos 4 caracteres&quot;</span><span class="ruby-string">&quot;La clave debe contener sólo caracteres de la A a la Z y debe tener al menos 4 caracteres&quot;</span>
-
-        <span class="ruby-identifier">lugares</span> = <span class="ruby-value">3</span>
-        <span class="ruby-identifier">abecedario</span> = (<span class="ruby-string">&#39;A&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;Z&#39;</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">join</span>
-        <span class="ruby-identifier">i</span> = <span class="ruby-identifier">lugares</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">abecedario</span>.<span class="ruby-identifier">size</span> 
-        <span class="ruby-ivar">@desencriptado</span> = <span class="ruby-identifier">abecedario</span>
-        <span class="ruby-ivar">@encriptado</span> = <span class="ruby-identifier">abecedario</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">abecedario</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">i</span>]
+            <pre><span class="ruby-comment"># File encriptador.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">tipo_encriptacion</span>, <span class="ruby-identifier">regexp_clave</span>, <span class="ruby-identifier">msj_error_clave</span>)
+        <span class="ruby-ivar">@tipo_encriptacion</span> = <span class="ruby-identifier">tipo_encriptacion</span>
+        <span class="ruby-ivar">@regexp_clave</span> = <span class="ruby-identifier">regexp_clave</span>
+        <span class="ruby-ivar">@msj_error_clave</span> = <span class="ruby-identifier">msj_error_clave</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -232,6 +264,46 @@ hacer el reemplazo en  la cadena que se quiere encriptar o desencriptar<br></p>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
+      <div id="method-i-cadena_valida-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cadena_valida?</span><span
+            class="method-args">(cadena)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Valida que una cadena enviada por parámetro cumpla con la regular
+expression  asignada a la instancia del encriptador. Si no cumple, levanta
+un <a href="CaracterNoValidoError.html">CaracterNoValidoError</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="cadena_valida-3F-source">
+            <pre><span class="ruby-comment"># File encriptador.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cadena_valida?</span>(<span class="ruby-identifier">cadena</span>)
+        <span class="ruby-identifier">valida</span> = <span class="ruby-identifier">cadena</span>.<span class="ruby-identifier">match</span>(<span class="ruby-ivar">@regexp_clave</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> }
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">valida</span>
+                <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">raise</span> <span class="ruby-constant">CaracterNoValidoError</span>.<span class="ruby-identifier">new</span> 
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cadena_valida-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cadena_valida-3F-method -->
+
+    
       <div id="method-i-clave_valida-3F" class="method-detail ">
         
         <div class="method-heading">
@@ -245,19 +317,16 @@ hacer el reemplazo en  la cadena que se quiere encriptar o desencriptar<br></p>
 
         <div class="method-description">
           
-          <p>Valida que una cadena enviada y una clave encriptada sean iguales cuando la
-clave se desencripta. <br> Convierte la cadena que se quiere comparar con
-la clave a mayúsculas<br> Si la cadena enviada no es válida, levanta  <a
-href="CaracterNoValidoError.html">CaracterNoValidoError</a></p>
+          <p>Verifica la validez de una cadena con una clave ya encriptada, se debe
+implementar en las subclases.</p>
           
           
 
           
           <div class="method-source-code" id="clave_valida-3F-source">
-            <pre><span class="ruby-comment"># File encriptador_caesar.rb, line 46</span>
+            <pre><span class="ruby-comment"># File encriptador.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">clave_valida?</span>(<span class="ruby-identifier">cadena</span>, <span class="ruby-identifier">clave</span>)
-        <span class="ruby-identifier">cadena_valida?</span> <span class="ruby-identifier">cadena</span>
-        (<span class="ruby-identifier">desencriptar</span> <span class="ruby-identifier">clave</span>).<span class="ruby-identifier">eql?</span> <span class="ruby-identifier">cadena</span>.<span class="ruby-identifier">upcase</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>(<span class="ruby-string">&quot;Encriptador.clave_valida?(cadena, clave) se debe implementar en las sublcases&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- clave_valida-3F-source -->
           
@@ -267,42 +336,6 @@ href="CaracterNoValidoError.html">CaracterNoValidoError</a></p>
 
         
       </div><!-- clave_valida-3F-method -->
-
-    
-      <div id="method-i-desencriptar" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">desencriptar</span><span
-            class="method-args">(clave)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Desencripta la clave enviada. Debe ser alfabética. <br> Convierte la cadena
-enviada a mayúsculas<br> Si la cadena enviada no es válida, levanta  <a
-href="CaracterNoValidoError.html">CaracterNoValidoError</a></p>
-          
-          
-
-          
-          <div class="method-source-code" id="desencriptar-source">
-            <pre><span class="ruby-comment"># File encriptador_caesar.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">desencriptar</span>(<span class="ruby-identifier">clave</span>)
-        <span class="ruby-identifier">cadena_valida?</span> <span class="ruby-identifier">clave</span>
-        <span class="ruby-identifier">clave</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-ivar">@encriptado</span>, <span class="ruby-ivar">@desencriptado</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- desencriptar-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- desencriptar-method -->
 
     
       <div id="method-i-encriptar" class="method-detail ">
@@ -318,17 +351,15 @@ href="CaracterNoValidoError.html">CaracterNoValidoError</a></p>
 
         <div class="method-description">
           
-          <p>Encripta la clave enviada. Debe ser alfabética. <br> Convierte la cadena
-enviada a mayúsculas</p>
+          <p>Para encriptar una clave, se debe implementar en las subclases.</p>
           
           
 
           
           <div class="method-source-code" id="encriptar-source">
-            <pre><span class="ruby-comment"># File encriptador_caesar.rb, line 29</span>
+            <pre><span class="ruby-comment"># File encriptador.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">encriptar</span>(<span class="ruby-identifier">clave</span>)
-        <span class="ruby-identifier">cadena_valida?</span> <span class="ruby-identifier">clave</span>
-        <span class="ruby-identifier">clave</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-ivar">@desencriptado</span>, <span class="ruby-ivar">@encriptado</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>(<span class="ruby-string">&quot;Encriptador.encriptar(clave) se debe implementar en las sublcases&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- encriptar-source -->
           

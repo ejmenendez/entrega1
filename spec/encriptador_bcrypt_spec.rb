@@ -28,25 +28,35 @@ describe EncriptadorBCrypt do
 		end
 		
 		it "Clave con caracteres no válidos" do
-			expect(encriptador.cadena_valida? "una clave" ).to be nil
-			expect(encriptador.cadena_valida? "%$#!=" ).to be nil
+			expect {
+				encriptador.cadena_valida? "una clave"
+				}.to raise_error CaracterNoValidoError
+				
+			expect {
+				encriptador.cadena_valida? "%$#!=" 
+				}.to raise_error CaracterNoValidoError
 		end
 		
 		it "Si tiene menos de 4 caracteres no es válida" do
-			expect(encriptador.cadena_valida? "" ).to be nil
-			expect(encriptador.cadena_valida? "123" ).to be nil
+			expect {
+				encriptador.cadena_valida? "" 
+				}.to raise_error CaracterNoValidoError
+			
+			expect {
+				encriptador.cadena_valida? "123" 
+				}.to raise_error CaracterNoValidoError
 		end
 	end
 	
 	describe "clave_valida?" do
 		
+		let	(:encriptada) {encriptador.encriptar "unaClave"}
+		
 		it "Valida dos claves iguales" do
-			encriptada = encriptador.encriptar "unaClave" 
 			expect(encriptador.clave_valida? "unaClave", encriptada).to be true
 		end
 		
 		it "Si la clave es distinta a la encriptada, no es válida" do
-			encriptada = encriptador.encriptar "unaClave" 
 			expect(encriptador.clave_valida? "otraClave", encriptada).to be false
 		end
 	
