@@ -1,4 +1,5 @@
 require_relative '../usuario'
+require 'spec_helper'
 
 describe Usuario do
 	

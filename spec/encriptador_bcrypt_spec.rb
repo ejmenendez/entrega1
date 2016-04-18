@@ -1,4 +1,5 @@
 require_relative '../encriptador_bcrypt'
+require 'spec_helper'
 
 describe EncriptadorBCrypt do
 	let (:encriptador) {EncriptadorBCrypt.new}

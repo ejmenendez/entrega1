@@ -16,16 +16,17 @@ class EncriptadorCaesar
 	
 	# Asigna el tipo de encriptción en String, la regular expression y el mensaje de error
 	# para la clave.
-	# Por defecto la cantidad de lugares desplazados es 3
-	# Puede recibir un array con caracteres que conforman el abecedario a utilizar, por defecto
-	# es A...Z
+	# La cantidad de lugares a despplazar es 3
+	# Crea un array con caracteres que conforman el abecedario a utilizar, de la A a la Z
 	# Crea dos arrays, uno encriptado y el otro no, para después hacer el reemplazo en 
 	# la cadena que se quiere encriptar o desencriptar
-	def initialize(lugares = 3, abecedario = ('A'..'Z').to_a.join)
+	def initialize
 		# Defino los caracteres que pueden usarse en la clave y el mensaje de error
 		@regexp_clave = /\A[A-Za-z]{4,}\z/
 		@msj_error_clave = "La clave debe contener sólo caracteres de la A a la Z y debe tener al menos 4 caracteres"
 		
+		lugares = 3
+		abecedario = ('A'..'Z').to_a.join
 		i = lugares % abecedario.size 
 		@desencriptado = abecedario
 		@encriptado = abecedario[i..-1] + abecedario[0...i]

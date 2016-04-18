@@ -1,4 +1,5 @@
 require_relative '../manejador_usuarios'
+require 'spec_helper'
 
 describe ManejadorUsuarios do
 	
@@ -170,8 +171,8 @@ describe ManejadorUsuarios do
 	
 	describe "regexp_clave" do
 		it "Los strings del mensaje de error del encriptador y del manejador son iguales" do
-			manejador.cambiar_encriptacion_caesar
-			expect(manejador.msj_error_clave).to eql EncriptadorCaesar.new.msj_error_clave
+			manejador.cambiar_encriptacion_bcrypt
+			expect(manejador.msj_error_clave).to eql EncriptadorBCrypt.new.msj_error_clave
 		end
 	end
 	

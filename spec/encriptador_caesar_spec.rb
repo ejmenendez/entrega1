@@ -1,4 +1,5 @@
 require_relative '../encriptador_caesar'
+require 'spec_helper'
 
 describe EncriptadorCaesar do
 	let (:encriptador) {EncriptadorCaesar.new}
