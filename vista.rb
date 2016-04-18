@@ -54,6 +54,10 @@ class Vista
 				end
 				
 				menu.choice(:Salir) do
+					# Si hay una sesión activa, la cierra antes de salir
+					if @controlador.hay_usuario_logueado?
+						cerrar_sesion
+					end
 					mensaje_info "Saliendo del programa."
 					salir = true
 				end
